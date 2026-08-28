@@ -1,7 +1,7 @@
-# 📋 Google Calendar API v3 단계별 실전 테스트 가이드 (Altostrat 계정 기준)
+# 📋 Google Calendar API v3 단계별 실전 테스트 가이드 (Google Workspace 계정 기준)
 
 > **대상 계정**: `admin@company.com`  
-> **대상 프로젝트**: `project-elevate-007` (GCP)  
+> **대상 프로젝트**: `your-gcp-project-id` (GCP)  
 > **목적**: 사내 보안 정책(CAA) 제약 없이 100% 안전하게 Google Calendar API와 Google Meet을 연동하여 회의 일정, 참석자 명단, Meet 화상회의 코드를 수집하고 AI 회의록 파이프라인에 연결합니다.
 
 ---
@@ -10,14 +10,14 @@
 
 ```mermaid
 flowchart LR
-    Step1["Step 1\nAltostrat 캘린더에\n테스트 회의 등록"] --> Step2["Step 2\nLive 인증 실행 &\ntoken.json 발급"]
-    Step2 --> Step3["Step 3\n캘린더/Meet/참석자\n파싱 결과 검증"]
-    Step3 --> Step4["Step 4\nAI 협업포털 회의록\n파이프라인 연동"]
+    Step1["Step 1<br/>Google 캘린더에<br/>테스트 회의 등록"] --> Step2["Step 2<br/>Live 인증 실행 &<br/>token.json 발급"]
+    Step2 --> Step3["Step 3<br/>캘린더/Meet/참석자<br/>파싱 결과 검증"]
+    Step3 --> Step4["Step 4<br/>AI 협업포털 회의록<br/>파이프라인 연동"]
 ```
 
 ---
 
-## 1️⃣ Step 1: Altostrat 캘린더에 테스트 회의 등록 (1분)
+## 1️⃣ Step 1: Google 캘린더에 테스트 회의 등록 (1분)
 
 1. 웹 브라우저에서 **[Google Calendar](https://calendar.google.com)**에 접속합니다.
    * *반드시 **`admin@company.com`** 계정으로 로그인되어 있는지 확인합니다.*

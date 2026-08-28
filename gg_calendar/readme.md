@@ -13,8 +13,8 @@
 
 ```
 ┌──────────────────────────────────────────────┐
-│ ☁️ Google Cloud Project (project-elevate-007) │
-│   • GCP 콘솔 관리자 (admin@...altostrat.com)  │
+│ ☁️ Google Cloud Project (your-gcp-project-id) │
+│   • GCP 콘솔 관리자 (admin@company.com)       │
 │   • 역할: Calendar API 활성화 및             │
 │          OAuth 2.0 클라이언트 앱(credentials.json) 발급 │
 └──────────────────────────────────────────────┘
