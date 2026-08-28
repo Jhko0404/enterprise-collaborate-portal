@@ -7,12 +7,12 @@
 
 ## 1. 개요 및 설계 목표 (System Objectives)
 
-Enterprise AI 협업포털은 대규모 기업 환경에서 진행되는 회의 녹음/녹화 미디어를 오디오 네이티브 멀티모달 AI로 분석하여 **30초 내에 완벽한 구조화 회의록과 화자 분리 전사본을 자동 생성**하고, **Google Cloud Speech-to-Text(Chirp 2) 음향 모델과의 실시간 성능/비용(TCO) 비교 분석**을 제공하는 차세대 솔루션입니다.
+Enterprise AI 협업포털은 대규모 기업 환경에서 진행되는 회의 녹음/녹화 미디어를 오디오 네이티브 멀티모달 AI로 분석하여 **구조화 회의록과 화자 분리 전사본을 자동 생성**하고, **Google Cloud Speech-to-Text(Chirp 2) 음향 모델과의 실시간 성능/비용(TCO) 비교 분석**을 제공하는 차세대 솔루션입니다.
 
 ### 🌟 핵심 설계 원칙
 1. **Zero-Transfer 초고속 처리**: 브라우저에서 GCS로 다이렉트 Resumable Upload 후, Vertex AI Gemini 3.7 Flash에 GCS URI(`gs://...`)를 직접 전달하여 추가 다운로드/업로드 병목 없이 즉시 추론합니다.
 2. **하이브리드 듀얼 엔진 아키텍처**:
-   * **Fast-Path**: Gemini 3.7 Flash를 통한 초고속 회의록 및 스마트 문맥 대화록 생성 (~30초 완료)
+   * **Fast-Path**: Gemini 3.7 Flash를 통한 초고속 회의록 및 스마트 문맥 대화록 생성
    * **비동기 10-Way 병렬 Cloud STT**: 15분 단위 청크 병렬 전사를 통한 100% 무가공 축어(Verbatim) 음향 모델 전사
 3. **Zero-Trust 보안**: Cloud Run 백엔드는 외부 직접 접근이 차단(`--no-allow-unauthenticated`)되어 있으며, Google Cloud API Gateway의 전용 OIDC 서비스 계정을 통해서만 호출됩니다.
 4. **Zero-Retention 데이터 보호**: GCS 임시 버킷의 오디오는 1일 수명주기(Lifecycle Rule)를 통해 자동 파기되며, 분석용 임시 청크는 처리 즉시 메모리/디스크에서 삭제됩니다.
@@ -23,27 +23,27 @@ Enterprise AI 협업포털은 대규모 기업 환경에서 진행되는 회의 
 
 ```mermaid
 flowchart TD
-    subgraph Client_Tier [사용자 계층]
-        Browser["💻 사용자 브라우저 / 웹앱 (SPA)\n• 대용량 GCS Resumable Direct Upload\n• 실시간 Side-by-Side 엔진 비교 뷰\n• 0ms 인메모리 화자 치환"]
+    subgraph Client_Tier ["사용자 계층"]
+        Browser["💻 사용자 브라우저 / 웹앱 (SPA)<br/>대용량 GCS Resumable Direct Upload<br/>실시간 Side-by-Side 엔진 비교 뷰<br/>0ms 인메모리 화자 치환"]
     end
 
-    subgraph Ingress_Tier [보안 인그레스 계층]
-        APIGateway["🛡️ Google Cloud API Gateway\n• Zero-Trust OIDC 인증 프록시\n• OpenAPI 2.0 라우팅 및 CORS 제어\n• Rate Limiting & 트래픽 관리"]
+    subgraph Ingress_Tier ["보안 인그레스 계층"]
+        APIGateway["🛡️ Google Cloud API Gateway<br/>Zero-Trust OIDC 인증 프록시<br/>OpenAPI 2.0 라우팅 및 CORS 제어<br/>Rate Limiting & 트래픽 관리"]
     end
 
-    subgraph Backend_Tier [서버리스 컴퓨팅 계층]
-        CloudRun["🚀 Cloud Run 프라이빗 백엔드 (FastAPI)\n• 2 vCPU / 4GiB / Concurrency 20\n• FFmpeg 16kHz 모노 오디오 전처리 엔진\n• ThreadPoolExecutor 10-Way 병렬 워커\n• Serverless ADC 무지연 인증"]
+    subgraph Backend_Tier ["서버리스 컴퓨팅 계층"]
+        CloudRun["🚀 Cloud Run 프라이빗 백엔드 (FastAPI)<br/>2 vCPU / 4GiB / Concurrency 20<br/>FFmpeg 16kHz 모노 오디오 전처리 엔진<br/>ThreadPoolExecutor 10-Way 병렬 워커<br/>Serverless ADC 무지연 인증"]
     end
 
-    subgraph AI_Engine_Tier [Google Cloud AI 엔진 계층]
-        GeminiFlash["🤖 Vertex AI Gemini 3.7 Flash\n• 오디오 네이티브 멀티모달 분석\n• Executive Summary, Decisions, Actions\n• 문맥 기반 화자 분리 대화록"]
-        CloudSTT["🎤 Cloud Speech-to-Text (Chirp 2)\n• 15분 단위 청크 10-Way 병렬 전사\n• SentencePiece 디토크나이징 (▁ 복원)\n• 2.5초 휴지(Pause) 기반 자연스러운 턴 분할"]
+    subgraph AI_Engine_Tier ["Google Cloud AI 엔진 계층"]
+        GeminiFlash["🤖 Vertex AI Gemini 3.7 Flash<br/>오디오 네이티브 멀티모달 분석<br/>Executive Summary, Decisions, Actions<br/>문맥 기반 화자 분리 대화록"]
+        CloudSTT["🎤 Cloud Speech-to-Text (Chirp 2)<br/>15분 단위 청크 10-Way 병렬 전사<br/>SentencePiece 디토크나이징 (▁ 복원)<br/>2.5초 휴지(Pause) 기반 자연스러운 턴 분할"]
     end
 
-    subgraph Storage_Tier [스토리지 & 협업 계층]
-        GCS_Temp[("☁️ GCS 임시 미디어 버킷\n• 1-Day Auto-Purge Lifecycle\n• 브라우저 다이렉트 Resumable 세션")]
-        GCS_DB[("📚 GCS 영속 회의록 보관소\n• reports_database.json\n• Cold-Start 자동 동기화")]
-        GWorkspace["📄 Google Docs / Drive\n• 1-Click 사내 표준 회의록 자동 생성"]
+    subgraph Storage_Tier ["스토리지 & 협업 계층"]
+        GCS_Temp[("☁️ GCS 임시 미디어 버킷<br/>1-Day Auto-Purge Lifecycle<br/>브라우저 다이렉트 Resumable 세션")]
+        GCS_DB[("📚 GCS 영속 회의록 보관소<br/>reports_database.json<br/>Cold-Start 자동 동기화")]
+        GWorkspace["📄 Google Docs / Drive<br/>1-Click 사내 표준 회의록 자동 생성"]
     end
 
     %% Client Interactions
@@ -55,7 +55,7 @@ flowchart TD
 
     %% AI Pipeline
     CloudRun -->|"4. Zero-Transfer GCS URI 직접 전달"| GeminiFlash
-    GeminiFlash -->|"5. 구조화 회의록 & 스마트 전사본 반환 (~30s)"| CloudRun
+    GeminiFlash -->|"5. 구조화 회의록 & 스마트 전사본 반환"| CloudRun
     CloudRun -->|"6. 15분 청크 10-Way 병렬 전사 (비동기)"| CloudSTT
     CloudSTT -->|"7. 축어 전사본 및 실시간 진행률(%) 반환"| CloudRun
 

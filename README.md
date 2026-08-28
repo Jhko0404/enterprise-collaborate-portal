@@ -7,7 +7,7 @@
 
 ## 🌟 개요 (Overview)
 
-**Enterprise AI Meeting Notes Portal**은 대규모 엔터프라이즈 환경에서 진행되는 회의 녹음/녹화 미디어를 오디오 네이티브 멀티모달 AI로 심층 분석하여, **단 30초 만에 구조화 회의록(Executive Summary, Key Decisions, Action Items, Deep Agendas)과 화자 분리 대화록을 자동 생성**하고, **Google Cloud Speech-to-Text(Chirp 2) 음향 모델과의 실시간 성능/비용(TCO) 비교 분석**을 제공하는 차세대 기업용 AI 솔루션입니다.
+**Enterprise AI Meeting Notes Portal**은 대규모 엔터프라이즈 환경에서 진행되는 회의 녹음/녹화 미디어를 오디오 네이티브 멀티모달 AI로 심층 분석하여, **구조화 회의록(Executive Summary, Key Decisions, Action Items, Deep Agendas)과 화자 분리 대화록을 자동 생성**하고, **Google Cloud Speech-to-Text(Chirp 2) 음향 모델과의 실시간 성능/비용(TCO) 비교 분석**을 제공하는 차세대 기업용 AI 솔루션입니다.
 
 ---
 
@@ -15,7 +15,7 @@
 
 | 기능 분류 | 주요 내용 |
 | :--- | :--- |
-| **⚡ Fast-Path 초고속 회의록** | **Vertex AI Gemini 3.7 Flash**를 활용하여 2시간 대용량 오디오를 **30초 내에 완벽한 구조화 회의록으로 자동 생성** |
+| **⚡ Fast-Path 초고속 회의록** | **Vertex AI Gemini 3.7 Flash**를 활용하여 대용량 오디오를 **완벽한 구조화 회의록으로 자동 생성** |
 | **🎤 10-Way 병렬 Cloud STT** | 대용량 오디오를 15분 단위 청크로 분할하여 **10-Way 동시 병렬 전사** 수행 및 실시간 진행률(%) 표출 |
 | **⚖️ 실시간 듀얼 엔진 비교** | Gemini 스마트 문맥 전사 vs Cloud STT 순수 음향 축어(Verbatim) 전사를 **좌우 분할 뷰(Side-by-Side)**로 나란히 비교 |
 | **💰 TCO 비용 절감 분석** | 회의 2시간 기준 **Gemini ~160원 vs STT ~2,800원 (94.3% / 17.5배 비용 절감)** 지표 실시간 계산 |
@@ -29,34 +29,34 @@
 
 ```mermaid
 flowchart TD
-    subgraph Client [사용자 브라우저 / 웹 클라이언트]
-        UI[모던 벤토 그리드 UI & 웹앱]
+    subgraph Client ["사용자 브라우저 / 웹 클라이언트"]
+        UI["모던 벤토 그리드 UI & 웹앱"]
     end
 
-    subgraph Ingress [보안 인그레스 계층]
-        GW[Google Cloud API Gateway\n(Zero-Trust OIDC 프록시)]
+    subgraph Ingress ["보안 인그레스 계층"]
+        GW["Google Cloud API Gateway<br/>Zero-Trust OIDC 프록시"]
     end
 
-    subgraph Compute [서버리스 백엔드 계층]
-        CR[Cloud Run 프라이빗 컨테이너\n(FastAPI / 4GiB / 2 vCPU / Concurrency 20)]
+    subgraph Compute ["서버리스 백엔드 계층"]
+        CR["Cloud Run 프라이빗 컨테이너<br/>FastAPI / 4GiB / 2 vCPU / Concurrency 20"]
     end
 
-    subgraph AI_Engines [Google Cloud AI 엔진]
-        V_AI[Vertex AI Gemini 3.7 Flash\n(오디오 네이티브 멀티모달)]
-        STT[Cloud Speech-to-Text\n(Chirp 2 / 10-Way Parallel Worker)]
+    subgraph AI_Engines ["Google Cloud AI 엔진"]
+        V_AI["Vertex AI Gemini 3.7 Flash<br/>오디오 네이티브 멀티모달"]
+        STT["Cloud Speech-to-Text<br/>Chirp 2 / 10-Way Parallel Worker"]
     end
 
-    subgraph Storage_Security [영속 스토리지 및 보안]
-        GCS[Cloud Storage Temp Bucket\n(1-Day Auto Purge Lifecycle)]
-        DOCS[Google Workspace Docs / Drive]
+    subgraph Storage_Security ["영속 스토리지 및 보안"]
+        GCS[("Cloud Storage Temp Bucket<br/>1-Day Auto Purge Lifecycle")]
+        DOCS["Google Workspace Docs / Drive"]
     end
 
-    UI -->|HTTPS / REST API| GW
-    GW -->|OIDC 인증 토큰| CR
-    CR -->|GCS Resumable Direct Session| GCS
-    CR -->|구조화 회의록 및 스마트 전사| V_AI
-    CR -->|15분 청크 10-Way 병렬 전사| STT
-    CR -->|1-Click Docs 내보내기| DOCS
+    UI -->|"HTTPS / REST API"| GW
+    GW -->|"OIDC 인증 토큰"| CR
+    CR -->|"GCS Resumable Direct Session"| GCS
+    CR -->|"구조화 회의록 및 스마트 전사"| V_AI
+    CR -->|"15분 청크 10-Way 병렬 전사"| STT
+    CR -->|"1-Click Docs 내보내기"| DOCS
 ```
 
 ---
