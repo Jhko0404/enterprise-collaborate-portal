@@ -46,7 +46,7 @@ MOCK_CALENDAR_EVENTS = [
     },
     {
         "id": "event_t3s5_session_20260819",
-        "summary": "T3S5 고정현 기술 세션 (지능형 고객 에이전트 구축)",
+        "summary": "T3S5 지능형 고객 에이전트 구축 기술 세션",
         "description": "Google Cloud Gemini Enterprise for CX 및 CX Agent Studio 라이브 데모",
         "start": {"dateTime": "2026-08-19T16:09:00+09:00"},
         "end": {"dateTime": "2026-08-19T16:36:00+09:00"},

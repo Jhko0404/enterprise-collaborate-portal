@@ -2,7 +2,7 @@
 """
 🧪 Google Meet REST API v2 로컬 & 라이브 테스트 스위트
 - 대상: spaces, conferenceRecords, recordings, transcripts, entries
-- 작성자: 고정현 (Account CE, Google Cloud)
+- 작성: Google Cloud Architecture Team
 """
 
 import os

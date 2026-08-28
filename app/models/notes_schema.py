@@ -4,7 +4,7 @@ from typing import List, Optional
 class ActionItemModel(BaseModel):
     item_no: int = Field(description="항목 번호")
     task_description: str = Field(description="수행할 실행 과제 내용")
-    assignee: str = Field(description="담당자 이름 (예: 고정현)")
+    assignee: str = Field(description="담당자 이름 (예: 홍길동)")
     due_date: str = Field(description="완료 목표 기한 (예: 2026-09-01)")
     priority: Optional[str] = Field(default="MEDIUM", description="우선순위 (HIGH / MEDIUM / LOW)")
 

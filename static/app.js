@@ -737,7 +737,7 @@ function renderNotes() {
 function getSpeakerPillClass(speaker) {
   if (!speaker) return "generic-spk";
   if (speaker.includes("홍길동") || speaker.includes("리테일 회사 PM")) return "client-pm";
-  if (speaker.includes("고정현") || speaker.includes("Google Cloud")) return "google-ce";
+  if (speaker.includes("담당 CE") || speaker.includes("Google Cloud")) return "google-ce";
   if (speaker.includes("이몽룡") || speaker.includes("성춘향")) return "client-eng";
   if (speaker.includes("SI 수행사")) return "partner-si";
   if (speaker.includes("임꺽정") || speaker.includes("Workspace")) return "workspace-spec";
