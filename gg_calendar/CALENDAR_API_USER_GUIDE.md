@@ -48,7 +48,7 @@
   "items": [
     {
       "id": "user@coway.com",
-      "summary": "김유진 팀장 (기본 캘린더)",
+      "summary": "홍길동 팀장 (기본 캘린더)",
       "primary": true,
       "timeZone": "Asia/Seoul",
       "accessRole": "owner"
@@ -86,7 +86,7 @@
 ```json
 {
   "kind": "calendar#events",
-  "summary": "김유진 팀장 캘린더",
+  "summary": "홍길동 팀장 캘린더",
   "items": [
     {
       "id": "evt_coway_20260820_01",
@@ -115,7 +115,7 @@
       },
       "attendees": [
         {
-          "displayName": "김유진 팀장",
+          "displayName": "홍길동 팀장",
           "email": "yj_kim@coway.com",
           "responseStatus": "accepted"
         },

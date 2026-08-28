@@ -19,7 +19,7 @@
 #### 👥 [TC-05] 참가자 및 세션 이력 (총 7명)
 | No | 참석자 이름 / 직책 | 계정 식별 (Email) | 인증 유형 | 최초 입장 | 최종 퇴장 | 세션 체류 시간 |
 |:--:|:---|:---|:---:|:---:|:---:|:---:|
-| 1 | 김유진 팀장 (코웨이 PM) | `yj_kim@coway.com` | signedinUser | 15:03:00 | 16:28:37 | 85분 37초 |
+| 1 | 홍길동 팀장 (코웨이 PM) | `yj_kim@coway.com` | signedinUser | 15:03:00 | 16:28:37 | 85분 37초 |
 | 2 | 정소영 님 (코웨이) | `sy_jung@coway.com` | signedinUser | 15:03:05 | 16:28:30 | 85분 25초 |
 | 3 | 이상훈 님 (코웨이) | `sh_lee@coway.com` | signedinUser | 15:03:10 | 16:28:35 | 85분 25초 |
 | 4 | 고정현 CE (Google Cloud) | `junghyunko@google.com` | signedinUser | 15:02:45 | 16:28:37 | 85분 52초 |

@@ -35,7 +35,7 @@ MOCK_CALENDAR_EVENTS = [
             ]
         },
         "attendees": [
-            {"displayName": "김유진 팀장", "email": "yj_kim@coway.com", "responseStatus": "accepted"},
+            {"displayName": "홍길동 팀장", "email": "yj_kim@coway.com", "responseStatus": "accepted"},
             {"displayName": "정소영 님", "email": "sy_jung@coway.com", "responseStatus": "accepted"},
             {"displayName": "이상훈 님", "email": "sh_lee@coway.com", "responseStatus": "accepted"},
             {"displayName": "고정현 CE", "email": "junghyunko@google.com", "responseStatus": "accepted"},

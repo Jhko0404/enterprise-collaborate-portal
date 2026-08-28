@@ -159,11 +159,11 @@ def run_tests(gateway_url: str = "http://127.0.0.1:8080"):
     try:
         payload = {
             "markdown_text": "회의에서 [화자 1]과 [화자 2]가 논의했습니다.",
-            "speaker_mapping": {"[화자 1]": "김유진 팀장", "[화자 2]": "이상훈 담당"}
+            "speaker_mapping": {"[화자 1]": "홍길동 팀장", "[화자 2]": "이상훈 담당"}
         }
         r = client.post("/api/v1/notes/replace-speakers", json=payload)
         updated = r.json().get("updated_markdown", "")
-        assert_test("POST /api/v1/notes/replace-speakers", "김유진 팀장과 이상훈 담당가 논의했습니다." in updated, "(1-Click Batch Replacement verified)")
+        assert_test("POST /api/v1/notes/replace-speakers", "홍길동 팀장과 이상훈 담당가 논의했습니다." in updated, "(1-Click Batch Replacement verified)")
     except Exception as e:
         assert_test("POST /api/v1/notes/replace-speakers", False, f"(Error: {e})")
 

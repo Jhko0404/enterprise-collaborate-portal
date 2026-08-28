@@ -32,7 +32,7 @@ MEETINGS_DATA = [
             {
                 "name": "conferenceRecords/conf-20260818-coway-dx-gws/participants/p-01",
                 "user_type": "signedinUser",
-                "display_name": "김유진 팀장 (코웨이 PM)",
+                "display_name": "홍길동 팀장 (코웨이 PM)",
                 "email": "yj_kim@coway.com",
                 "earliest_start_time": "2026-08-18T15:03:00+09:00",
                 "latest_end_time": "2026-08-18T16:28:37+09:00",

@@ -27,12 +27,12 @@ def test_api_e2e():
     print("2. POST /api/v1/notes/replace-speakers 테스트...")
     replace_payload = {
         "markdown_text": "안건 논의에서 [참석자 1]이 발언했습니다.",
-        "speaker_mapping": {"[참석자 1]": "김유진 팀장"}
+        "speaker_mapping": {"[참석자 1]": "홍길동 팀장"}
     }
     res = client.post("/api/v1/notes/replace-speakers", json=replace_payload)
     assert res.status_code == 200
     res_data = res.json()
-    assert "김유진 팀장이 발언했습니다." in res_data.get("updated_markdown")
+    assert "홍길동 팀장이 발언했습니다." in res_data.get("updated_markdown")
     print("   ✅ 화자 치환 API 정상 동작 확인")
 
     # 3. 미디어 파일 업로드 API 검증
@@ -48,7 +48,7 @@ def test_api_e2e():
             files = {"file": ("test_api_speech.wav", f, "audio/wav")}
             data = {
                 "title": "API E2E 검증 회의",
-                "attendees": "김유진 팀장, 이상훈 담당, 고정현 CE",
+                "attendees": "홍길동 팀장, 이상훈 담당, 고정현 CE",
                 "template_type": "CFT_REGULAR"
             }
             res = client.post("/api/v1/notes/upload-media", files=files, data=data)

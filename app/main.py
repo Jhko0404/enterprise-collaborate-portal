@@ -1389,7 +1389,7 @@ def process_gcs_media(req: ProcessGCSMediaRequest):
 def process_uploaded_media(
     file: UploadFile = File(...),
     title: str = Form("코웨이 AI 기술 미팅"),
-    attendees: str = Form("김유진 팀장, 이상훈 담당, 고정현 CE"),
+    attendees: str = Form("홍길동 팀장, 이상훈 담당, 고정현 CE"),
     template_type: str = Form("CFT_REGULAR")
 ):
     """

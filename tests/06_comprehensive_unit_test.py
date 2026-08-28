@@ -25,7 +25,7 @@ def run_all_tests():
         "[참석자 1]은 AI 시스템 아키텍처를 제안했고, Speaker 3은 이에 동의했습니다."
     )
     mapping = {
-        "[참석자 1]": "김유진 팀장 (코웨이)",
+        "[참석자 1]": "홍길동 팀장 (코웨이)",
         "[화자 2]": "고정현 CE (Google Cloud)",
         "Speaker 3": "김원유 Specialist (Google Workspace)"
     }
@@ -35,7 +35,7 @@ def run_all_tests():
     assert "[참석자 1]" not in res_text, "참석자 1 치환 실패"
     assert "[화자 2]" not in res_text, "화자 2 치환 실패"
     assert "Speaker 3" not in res_text, "Speaker 3 치환 실패"
-    assert "김유진 팀장 (코웨이)" in res_text
+    assert "홍길동 팀장 (코웨이)" in res_text
     assert "고정현 CE (Google Cloud)" in res_text
     assert "김원유 Specialist (Google Workspace)" in res_text
     print("   ✅ Service 계층 커스텀 화자 다중 치환 성공")
@@ -48,7 +48,7 @@ def run_all_tests():
     assert res_api.status_code == 200
     api_json = res_api.json()
     assert api_json.get("status") == "SUCCESS"
-    assert "김유진 팀장 (코웨이)" in api_json.get("updated_markdown")
+    assert "홍길동 팀장 (코웨이)" in api_json.get("updated_markdown")
     print("   ✅ API POST /api/v1/notes/replace-speakers 엔드포인트 응답 검증 성공")
 
     # -------------------------------------------------------------
@@ -66,7 +66,7 @@ def run_all_tests():
         "duration_minutes": 45,
         "template_type": "CFT_REGULAR",
         "template_name": "CFT 정기 회의",
-        "attendees": "김유진 팀장, 고정현 CE",
+        "attendees": "홍길동 팀장, 고정현 CE",
         "summary_snippet": "단위 테스트 검증용 1페이지 요약입니다.",
         "executive_summary": "단위 테스트 검증용 상세 요약 내용입니다.",
         "key_decisions": ["SimSolid PoC 진행 합의"],
