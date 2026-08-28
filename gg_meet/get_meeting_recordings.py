@@ -77,13 +77,13 @@ def get_credentials(token_file: str = "token.json", creds_file: str = "credentia
     print("=" * 75)
     print("Google Meet 및 Drive API를 호출하려면 아래 2가지 방법 중 하나를 선택해 주세요:\n")
     print("💡 [방법 1: OAuth 2.0 클라이언트 ID (가장 권장 - 개인 드라이브/미트 접근)]")
-    print("  1. GCP 콘솔 접속: https://console.cloud.google.com/apis/credentials?project=jhk-ai-sandbox-378741")
+    print("  1. GCP 콘솔 접속: https://console.cloud.google.com/apis/credentials?project=your-gcp-project-id")
     print("  2. '사용자 인증 정보 만들기' ➔ 'OAuth 클라이언트 ID' (유형: 데스크톱 앱) 생성")
     print("  3. 다운로드한 JSON 파일을 다음 경로에 'credentials.json' 이름으로 저장:")
     print(f"     👉 {creds_path}\n")
     print("💡 [방법 2: gcloud ADC 재인증]")
     print("  터미널에서 아래 명령어 실행:")
-    print("  $ gcloud auth application-default login --project=jhk-ai-sandbox-378741")
+    print("  $ gcloud auth application-default login --project=your-gcp-project-id")
     print("=" * 75 + "\n")
     return None
 

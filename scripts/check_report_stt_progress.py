@@ -124,13 +124,15 @@ def check_progress(search_term=""):
     print("☁️ [Cloud Run 백엔드 최근 로그 (STT 관련)]")
     print("=" * 70)
     try:
+        project_id = os.environ.get("GCP_PROJECT_ID", "")
         cmd = [
             "gcloud", "logging", "read",
             'resource.type="cloud_run_revision" AND resource.labels.service_name="enterprise-meet-notes-service"',
             "--limit=15",
-            "--project=project-elevate-007",
             "--format=table(timestamp,textPayload)"
         ]
+        if project_id:
+            cmd.append(f"--project={project_id}")
         res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=15)
         if res.returncode == 0 and res.stdout.strip():
             print(res.stdout)

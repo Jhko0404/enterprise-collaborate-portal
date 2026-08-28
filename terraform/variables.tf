@@ -1,7 +1,7 @@
 variable "project_id" {
   description = "Google Cloud Project ID"
   type        = string
-  default     = "jhk-ai-sandbox-378741"
+  default     = "your-gcp-project-id"
 }
 
 variable "access_token" {
@@ -19,7 +19,7 @@ variable "region" {
 variable "bucket_name" {
   description = "GCS Temporary Audio Storage Bucket Name"
   type        = string
-  default     = "jhk-ai-sandbox-378741-meet-audio-temp"
+  default     = "your-gcp-project-id-meet-audio-temp"
 }
 
 variable "artifact_repo_name" {

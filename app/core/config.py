@@ -6,9 +6,9 @@ from pydantic import Field
 os.environ.setdefault("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false")
 
 class Settings(BaseSettings):
-    GCP_PROJECT_ID: str = Field(default="project-elevate-007", env="GCP_PROJECT_ID")
+    GCP_PROJECT_ID: str = Field(default="your-gcp-project-id", env="GCP_PROJECT_ID")
     GCP_LOCATION: str = Field(default="global", env="GCP_LOCATION")
-    TEMP_GCS_BUCKET: str = Field(default="project-elevate-007-meet-audio-temp", env="TEMP_GCS_BUCKET")
+    TEMP_GCS_BUCKET: str = Field(default="your-gcp-project-id-meet-audio-temp", env="TEMP_GCS_BUCKET")
     
     # Deployed Service & Gateway Endpoints
     CLOUD_RUN_SERVICE_URL: str = Field(

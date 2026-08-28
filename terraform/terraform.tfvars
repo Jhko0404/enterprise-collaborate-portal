@@ -1,6 +1,6 @@
-project_id          = "jhk-ai-sandbox-378741"
+project_id          = "your-gcp-project-id"
 region              = "us-central1"
-bucket_name         = "jhk-ai-sandbox-378741-meet-audio-temp"
+bucket_name         = "your-gcp-project-id-meet-audio-temp"
 artifact_repo_name  = "enterprise-meet-notes-repo"
 tasks_queue_name    = "meet-notes-queue"
 bigquery_dataset_id = "enterprise_portal_analytics"

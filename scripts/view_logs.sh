@@ -5,9 +5,13 @@
 
 set -e
 
-PROJECT_ID="project-elevate-007"
-REGION="us-central1"
-SERVICE_NAME="enterprise-meet-notes-service"
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs -d '\n')
+fi
+
+PROJECT_ID="${GCP_PROJECT_ID:-$(gcloud config get-value project 2>/dev/null || echo 'your-gcp-project-id')}"
+REGION="${GCP_REGION:-us-central1}"
+SERVICE_NAME="${CLOUD_RUN_SERVICE_NAME:-enterprise-meet-notes-service}"
 LOCAL_LOG_PATH="/tmp/collaborate_portal_app.log"
 UVICORN_LOG_PATH="/tmp/collaborate_portal_uvicorn.log"
 
