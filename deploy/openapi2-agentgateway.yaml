@@ -5,8 +5,8 @@
 
 swagger: "2.0"
 info:
-  title: "Coway Meeting Notes & Diarization Agent Gateway"
-  description: "Unified Enterprise Ingress Gateway for Coway AI Meeting Notes, Speaker Diarization, and Template Management."
+  title: "Enterprise Meeting Notes & Diarization Agent Gateway"
+  description: "Unified Enterprise Ingress Gateway for Enterprise AI Meeting Notes, Speaker Diarization, and Template Management."
   version: "1.0.0"
 schemes:
   - "https"

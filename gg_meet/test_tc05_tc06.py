@@ -5,7 +5,7 @@
   • [TC-05] 회의 참가자 및 세션 이력 조회 (ConferenceRecordsService.list_participants)
   • [TC-06] 회의 녹화본 메타데이터 & Drive ID 추출 (ConferenceRecordsService.list_recordings)
 - 대상 회의:
-  • 회의 1: [Coway DX센터] GWS api활용 관련 논의 (2026-08-18 15:00 ~ 17:00 KST)
+  • 회의 1: [Enterprise DX센터] GWS api활용 관련 논의 (2026-08-18 15:00 ~ 17:00 KST)
   • 회의 2: test (2026-08-13 11:30 ~ 12:00 KST)
 """
 
@@ -21,19 +21,19 @@ sys.path.insert(0, ROOT_DIR)
 MEETINGS_DATA = [
     {
         "id": "meeting-1",
-        "title": "[Coway DX센터] GWS api활용 관련 논의",
+        "title": "[Enterprise DX센터] GWS api활용 관련 논의",
         "schedule": "Tuesday, August 18 ⋅ 3:00 – 5:00pm (2026-08-18 15:00 ~ 17:00 KST)",
-        "conference_record_name": "conferenceRecords/conf-20260818-coway-dx-gws",
-        "space_name": "spaces/coway-gws-dx-api",
+        "conference_record_name": "conferenceRecords/conf-20260818-enterprise-gws",
+        "space_name": "spaces/enterprise-gws-api",
         "actual_start": "2026-08-18T15:03:00+09:00",
         "actual_end": "2026-08-18T16:28:37+09:00",
         "duration_str": "85분 37초 (5,137초)",
         "participants": [
             {
-                "name": "conferenceRecords/conf-20260818-coway-dx-gws/participants/p-01",
+                "name": "conferenceRecords/conf-20260818-enterprise-gws/participants/p-01",
                 "user_type": "signedinUser",
                 "display_name": "홍길동 팀장 (리테일 회사 PM)",
-                "email": "yj_kim@coway.com",
+                "email": "hong@example.com",
                 "earliest_start_time": "2026-08-18T15:03:00+09:00",
                 "latest_end_time": "2026-08-18T16:28:37+09:00",
                 "sessions": [
@@ -41,10 +41,10 @@ MEETINGS_DATA = [
                 ]
             },
             {
-                "name": "conferenceRecords/conf-20260818-coway-dx-gws/participants/p-02",
+                "name": "conferenceRecords/conf-20260818-enterprise-gws/participants/p-02",
                 "user_type": "signedinUser",
-                "display_name": "정소영 님 (리테일 회사)",
-                "email": "sy_jung@coway.com",
+                "display_name": "성춘향 님 (리테일 회사)",
+                "email": "sung@example.com",
                 "earliest_start_time": "2026-08-18T15:03:05+09:00",
                 "latest_end_time": "2026-08-18T16:28:30+09:00",
                 "sessions": [
@@ -52,10 +52,10 @@ MEETINGS_DATA = [
                 ]
             },
             {
-                "name": "conferenceRecords/conf-20260818-coway-dx-gws/participants/p-03",
+                "name": "conferenceRecords/conf-20260818-enterprise-gws/participants/p-03",
                 "user_type": "signedinUser",
-                "display_name": "이상훈 님 (리테일 회사)",
-                "email": "sh_lee@coway.com",
+                "display_name": "이몽룡 님 (리테일 회사)",
+                "email": "lee@example.com",
                 "earliest_start_time": "2026-08-18T15:03:10+09:00",
                 "latest_end_time": "2026-08-18T16:28:35+09:00",
                 "sessions": [
@@ -63,10 +63,10 @@ MEETINGS_DATA = [
                 ]
             },
             {
-                "name": "conferenceRecords/conf-20260818-coway-dx-gws/participants/p-04",
+                "name": "conferenceRecords/conf-20260818-enterprise-gws/participants/p-04",
                 "user_type": "signedinUser",
-                "display_name": "고정현 CE (Google Cloud)",
-                "email": "junghyunko@google.com",
+                "display_name": "담당 CE (Google Cloud)",
+                "email": "ce@google.com",
                 "earliest_start_time": "2026-08-18T15:02:45+09:00",
                 "latest_end_time": "2026-08-18T16:28:37+09:00",
                 "sessions": [
@@ -74,10 +74,10 @@ MEETINGS_DATA = [
                 ]
             },
             {
-                "name": "conferenceRecords/conf-20260818-coway-dx-gws/participants/p-05",
+                "name": "conferenceRecords/conf-20260818-enterprise-gws/participants/p-05",
                 "user_type": "signedinUser",
-                "display_name": "김진아 FSR (Google Cloud)",
-                "email": "jinakim@google.com",
+                "display_name": "심청 FSR (Google Cloud)",
+                "email": "sales@google.com",
                 "earliest_start_time": "2026-08-18T15:03:00+09:00",
                 "latest_end_time": "2026-08-18T16:20:00+09:00",
                 "sessions": [
@@ -85,10 +85,10 @@ MEETINGS_DATA = [
                 ]
             },
             {
-                "name": "conferenceRecords/conf-20260818-coway-dx-gws/participants/p-06",
+                "name": "conferenceRecords/conf-20260818-enterprise-gws/participants/p-06",
                 "user_type": "signedinUser",
-                "display_name": "김원유 Specialist (Google Workspace)",
-                "email": "wonyukim@google.com",
+                "display_name": "임꺽정 Specialist (Google Workspace)",
+                "email": "workspace@google.com",
                 "earliest_start_time": "2026-08-18T15:05:00+09:00",
                 "latest_end_time": "2026-08-18T16:28:30+09:00",
                 "sessions": [
@@ -96,10 +96,10 @@ MEETINGS_DATA = [
                 ]
             },
             {
-                "name": "conferenceRecords/conf-20260818-coway-dx-gws/participants/p-07",
+                "name": "conferenceRecords/conf-20260818-enterprise-gws/participants/p-07",
                 "user_type": "signedinUser",
-                "display_name": "IBM 수행사 팀장",
-                "email": "partner_ibm@ibm.com",
+                "display_name": "SI 수행사 팀장",
+                "email": "partner@partner.com",
                 "earliest_start_time": "2026-08-18T15:03:15+09:00",
                 "latest_end_time": "2026-08-18T16:28:35+09:00",
                 "sessions": [
@@ -122,8 +122,8 @@ MEETINGS_DATA = [
             {
                 "name": "conferenceRecords/conf-20260813-elevate-table5-007/participants/p-01",
                 "user_type": "signedinUser",
-                "display_name": "고정현 CE (Google Cloud)",
-                "email": "junghyunko@google.com",
+                "display_name": "담당 CE (Google Cloud)",
+                "email": "ce@google.com",
                 "earliest_start_time": "2026-08-13T11:30:00+09:00",
                 "latest_end_time": "2026-08-13T12:03:22+09:00",
                 "sessions": [

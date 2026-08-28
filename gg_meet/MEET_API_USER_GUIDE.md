@@ -158,7 +158,7 @@ Google Meet API v2는 크게 **1) 회의 공간 관리(Spaces)**와 **2) 회의 
       "name": "conferenceRecords/conf_20260820_98765/participants/part_user_02",
       "signedinUser": {
         "user": "users/9988776655",
-        "displayName": "고정현 CE"
+        "displayName": "담당 CE"
       },
       "earliestStartTime": "2026-08-20T14:00:20Z",
       "latestEndTime": "2026-08-20T15:00:30Z"

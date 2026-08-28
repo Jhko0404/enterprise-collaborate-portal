@@ -7,7 +7,7 @@ set -e
 
 PROJECT_ID="project-elevate-007"
 REGION="us-central1"
-SERVICE_NAME="coway-meet-notes-service"
+SERVICE_NAME="enterprise-meet-notes-service"
 LOCAL_LOG_PATH="/tmp/collaborate_portal_app.log"
 UVICORN_LOG_PATH="/tmp/collaborate_portal_uvicorn.log"
 
@@ -65,7 +65,7 @@ case "${MODE}" in
   --api)
     echo "🌐 [REST API 구조화 로그 조회] GET /api/v1/system/logs?level=ERROR ..."
     curl -s "http://localhost:9090/api/v1/system/logs?level=ERROR&limit=10" | python3 -m json.tool || \
-    curl -s "https://coway-agent-gateway-7p7fk8nj.uc.gateway.dev/api/v1/system/logs?level=ERROR&limit=10" | python3 -m json.tool
+    curl -s "https://enterprise-agent-gateway.uc.gateway.dev/api/v1/system/logs?level=ERROR&limit=10" | python3 -m json.tool
     ;;
 
   *)

@@ -25,7 +25,7 @@ variable "bucket_name" {
 variable "artifact_repo_name" {
   description = "Artifact Registry Docker Repository Name"
   type        = string
-  default     = "coway-meet-notes-repo"
+  default     = "enterprise-meet-notes-repo"
 }
 
 variable "tasks_queue_name" {
@@ -37,11 +37,11 @@ variable "tasks_queue_name" {
 variable "bigquery_dataset_id" {
   description = "BigQuery Analytics Dataset ID"
   type        = string
-  default     = "coway_portal_analytics"
+  default     = "enterprise_portal_analytics"
 }
 
 variable "service_account_id" {
   description = "Dedicated Service Account ID for Meet Notes Processor"
   type        = string
-  default     = "coway-meet-notes-sa"
+  default     = "enterprise-meet-notes-sa"
 }

@@ -141,7 +141,7 @@ claude
 ```
 
 #### ⚙️ Claude Code가 내부적으로 자동 수행하는 작업:
-1. 레포지토리 내 [`CLAUDE.md`](file:///usr/local/google/home/junghyunko/git/2026-AI/enterprise-collaborate-portal/CLAUDE.md) 아키텍처 가이드라인 자동 로드
+1. 레포지토리 내 [`CLAUDE.md`](CLAUDE.md) 아키텍처 가이드라인 자동 로드
 2. `gcloud auth` 및 `.env` 설정 자동 감지 및 보정
 3. `./deploy/quickstart.sh`를 실행하여 API 활성화 ➔ GCS 버킷 ➔ Cloud Run ➔ API Gateway 일괄 구축
 4. 배포 완료 후 즉시 헬스체크를 수행하고 최종 접속 URL(`https://...gateway.dev`) 안내

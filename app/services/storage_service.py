@@ -63,7 +63,7 @@ class GCSStorageService:
             effective_content_type = MIME_MAP.get(ext, content_type or "application/octet-stream")
             
             # GCS Resumable Upload에서 브라우저 CORS PUT 요청을 허용하기 위해 origin 파라미터 전달
-            effective_origin = origin if (origin and origin != "*") else "https://coway-agent-gateway-7p7fk8nj.uc.gateway.dev"
+            effective_origin = origin if (origin and origin != "*") else "https://enterprise-agent-gateway.uc.gateway.dev"
             session_url = blob.create_resumable_upload_session(
                 content_type=effective_content_type,
                 origin=effective_origin

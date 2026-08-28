@@ -28,7 +28,7 @@ class AudioService:
     def extract_audio(input_media_path: str, output_audio_path: str) -> str:
         """
         ffmpeg 서브프로세스를 호출하여 16kHz Mono 오디오 스트림 추출
-        - 출력 확장자가 .mp3인 경우 고압축 libmp3lame (64kbps)
+        - 출력 확장자가 .mp3인 경우 고압축 __LSI 수행사P3LAME__ (64kbps)
         - 출력 확장자가 .wav인 경우 16-bit PCM WAV
         """
         ext = os.path.splitext(output_audio_path)[1].lower()
@@ -37,7 +37,7 @@ class AudioService:
                 "ffmpeg", "-y",
                 "-i", input_media_path,
                 "-vn",
-                "-acodec", "libmp3lame",
+                "-acodec", "__LSI 수행사P3LAME__",
                 "-b:a", "64k",
                 "-ar", str(settings.AUDIO_SAMPLE_RATE),
                 "-ac", str(settings.AUDIO_CHANNELS),
@@ -109,7 +109,7 @@ class AudioService:
                 "-ss", str(start),
                 "-t", str(duration),
                 "-i", audio_path,
-                "-acodec", "libmp3lame",
+                "-acodec", "__LSI 수행사P3LAME__",
                 "-b:a", "64k",
                 "-ar", str(settings.AUDIO_SAMPLE_RATE),
                 "-ac", str(settings.AUDIO_CHANNELS),

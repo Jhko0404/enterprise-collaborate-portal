@@ -12,11 +12,11 @@ class Settings(BaseSettings):
     
     # Deployed Service & Gateway Endpoints
     CLOUD_RUN_SERVICE_URL: str = Field(
-        default="https://coway-meet-notes-service-924561771126.us-central1.run.app",
+        default="http://localhost:9090",
         env="CLOUD_RUN_SERVICE_URL"
     )
     AGENT_GATEWAY_URL: str = Field(
-        default="https://coway-meet-notes-service-924561771126.us-central1.run.app",
+        default="http://localhost:9090",
         env="AGENT_GATEWAY_URL"
     )
 

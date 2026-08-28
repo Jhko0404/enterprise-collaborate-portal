@@ -48,7 +48,7 @@ def test_api_e2e():
             files = {"file": ("test_api_speech.wav", f, "audio/wav")}
             data = {
                 "title": "API E2E 검증 회의",
-                "attendees": "홍길동 팀장, 이상훈 담당, 고정현 CE",
+                "attendees": "홍길동 팀장, 이몽룡 담당, 담당 CE",
                 "template_type": "CFT_REGULAR"
             }
             res = client.post("/api/v1/notes/upload-media", files=files, data=data)

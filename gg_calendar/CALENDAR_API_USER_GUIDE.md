@@ -47,14 +47,14 @@
   "kind": "calendar#calendarList",
   "items": [
     {
-      "id": "user@coway.com",
+      "id": "user@example.com",
       "summary": "홍길동 팀장 (기본 캘린더)",
       "primary": true,
       "timeZone": "Asia/Seoul",
       "accessRole": "owner"
     },
     {
-      "id": "c_188abc..._coway.com@group.calendar.google.com",
+      "id": "c_188abc..._enterprise.com@group.calendar.google.com",
       "summary": "리테일 회사 AI TFT 공유 캘린더",
       "primary": false,
       "timeZone": "Asia/Seoul",
@@ -89,7 +89,7 @@
   "summary": "홍길동 팀장 캘린더",
   "items": [
     {
-      "id": "evt_coway_20260820_01",
+      "id": "evt_meet_20260820_01",
       "summary": "리테일 회사 AI 협업포털 주간 정기 미팅",
       "description": "Google Meet 기반 회의록 자동화 및 화자 분리 아키텍처 점검",
       "start": {
@@ -116,17 +116,17 @@
       "attendees": [
         {
           "displayName": "홍길동 팀장",
-          "email": "yj_kim@coway.com",
+          "email": "hong@example.com",
           "responseStatus": "accepted"
         },
         {
-          "displayName": "정소영 님",
-          "email": "sy_jung@coway.com",
+          "displayName": "성춘향 님",
+          "email": "sung@example.com",
           "responseStatus": "accepted"
         },
         {
-          "displayName": "고정현 CE",
-          "email": "junghyunko@google.com",
+          "displayName": "담당 CE",
+          "email": "ce@google.com",
           "responseStatus": "accepted"
         }
       ]
@@ -147,7 +147,7 @@
 | 파라미터명 | 타입 | 필수 여부 | 예시 값 | 설명 |
 | :--- | :---: | :---: | :---: | :--- |
 | `calendarId` | String | **필수** | `primary` | 대상 캘린더 ID |
-| `eventId` | String | **필수** | `evt_coway_20260820_01` | 조회할 이벤트 고유 ID |
+| `eventId` | String | **필수** | `evt_meet_20260820_01` | 조회할 이벤트 고유 ID |
 
 #### 📤 Output (응답 데이터 구조 및 예시)
 * 단일 `Event` 리소스의 완전한 JSON 객체를 반환합니다. (제목, 시작/종료 일시, 회의 주최자 `organizer`, 참석자 목록 `attendees`, 화상회의 코드 `conferenceData`)
@@ -170,10 +170,10 @@
 2. GCS Direct Resumable Upload 방식으로 대용량 미디어 전송 최적화
 
 📋 Action Items:
-- [정소영 님] DWD 서비스 계정 권한 연동 (~08/25)
-- [고정현 CE] GCS 버킷 생성 및 라이프사이클 정책 배포 (~08/22)
+- [성춘향 님] DWD 서비스 계정 권한 연동 (~08/25)
+- [담당 CE] GCS 버킷 생성 및 라이프사이클 정책 배포 (~08/22)
 
-👉 전체 회의록 보기: https://coway-agent-gateway-7p7fk8nj.uc.gateway.dev"
+👉 전체 회의록 보기: https://enterprise-agent-gateway.uc.gateway.dev"
 }
 ```
 
@@ -202,13 +202,13 @@
     "timeZone": "Asia/Seoul"
   },
   "attendees": [
-    {"email": "yj_kim@coway.com"},
-    {"email": "sy_jung@coway.com"},
-    {"email": "junghyunko@google.com"}
+    {"email": "hong@example.com"},
+    {"email": "sung@example.com"},
+    {"email": "ce@google.com"}
   ],
   "conferenceData": {
     "createRequest": {
-      "requestId": "coway-req-20260825-01",
+      "requestId": "sample-req-20260825-01",
       "conferenceSolutionKey": {
         "type": "hangoutsMeet"
       }
@@ -220,7 +220,7 @@
 #### 📤 Output (응답 데이터)
 ```json
 {
-  "id": "evt_coway_20260825_followup",
+  "id": "evt_meet_20260825_followup",
   "status": "confirmed",
   "htmlLink": "https://www.google.com/calendar/event?eid=...",
   "hangoutLink": "https://meet.google.com/xyz-uvwx-rst",

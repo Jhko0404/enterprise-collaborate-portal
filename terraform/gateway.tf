@@ -7,8 +7,8 @@
 # 1. Cloud Armor WAF & DoS Defense Policy
 # ------------------------------------------------------------------------------
 resource "google_compute_security_policy" "agent_armor_policy" {
-  name        = "coway-agent-gateway-armor"
-  description = "Cloud Armor WAF, Rate Limiting & DoS Defense for Coway Agent Gateway"
+  name        = "enterprise-agent-gateway-armor"
+  description = "Cloud Armor WAF, Rate Limiting & DoS Defense for Enterprise Agent Gateway"
   project     = var.project_id
 
   # Rule 1: Default Allow Rule (Priority: 2147483647)
@@ -101,13 +101,13 @@ resource "google_compute_security_policy" "agent_armor_policy" {
 # 2. Serverless Network Endpoint Group (NEG) pointing to Cloud Run
 # ------------------------------------------------------------------------------
 resource "google_compute_region_network_endpoint_group" "serverless_neg" {
-  name                  = "coway-meet-notes-neg"
+  name                  = "enterprise-meet-notes-neg"
   network_endpoint_type = "SERVERLESS"
   region                = var.region
   project               = var.project_id
 
   cloud_run {
-    service = "coway-meet-notes-service"
+    service = "enterprise-meet-notes-service"
   }
 
   depends_on = [google_project_service.enabled_apis]
@@ -117,7 +117,7 @@ resource "google_compute_region_network_endpoint_group" "serverless_neg" {
 # 3. External HTTP(S) Backend Service with Cloud Armor WAF & Cloud CDN
 # ------------------------------------------------------------------------------
 resource "google_compute_backend_service" "gateway_backend_service" {
-  name                  = "coway-meet-notes-backend"
+  name                  = "enterprise-meet-notes-backend"
   project               = var.project_id
   protocol              = "HTTP"
   port_name             = "http"
@@ -157,13 +157,13 @@ resource "google_compute_backend_service" "gateway_backend_service" {
 # 4. URL Map & HTTP Target Proxy
 # ------------------------------------------------------------------------------
 resource "google_compute_url_map" "gateway_url_map" {
-  name            = "coway-meet-notes-url-map"
+  name            = "enterprise-meet-notes-url-map"
   project         = var.project_id
   default_service = google_compute_backend_service.gateway_backend_service.id
 }
 
 resource "google_compute_target_http_proxy" "gateway_http_proxy" {
-  name    = "coway-meet-notes-http-proxy"
+  name    = "enterprise-meet-notes-http-proxy"
   project = var.project_id
   url_map = google_compute_url_map.gateway_url_map.id
 }
@@ -172,7 +172,7 @@ resource "google_compute_target_http_proxy" "gateway_http_proxy" {
 # 5. Global Forwarding Rule (Public IPv4 External Entry Point)
 # ------------------------------------------------------------------------------
 resource "google_compute_global_forwarding_rule" "gateway_forwarding_rule" {
-  name                  = "coway-meet-notes-forwarding-rule"
+  name                  = "enterprise-meet-notes-forwarding-rule"
   project               = var.project_id
   target                = google_compute_target_http_proxy.gateway_http_proxy.id
   port_range            = "80"
@@ -185,8 +185,8 @@ resource "google_compute_global_forwarding_rule" "gateway_forwarding_rule" {
 # ------------------------------------------------------------------------------
 resource "google_api_gateway_api" "agent_api" {
   provider     = google
-  api_id       = "coway-meet-agent-gateway"
-  display_name = "Coway AI Agent Gateway API"
+  api_id       = "enterprise-meet-agent-gateway"
+  display_name = "Enterprise AI Agent Gateway API"
   project      = var.project_id
 
   depends_on = [google_project_service.enabled_apis]
@@ -195,8 +195,8 @@ resource "google_api_gateway_api" "agent_api" {
 resource "google_api_gateway_api_config" "agent_api_cfg" {
   provider      = google
   api           = google_api_gateway_api.agent_api.api_id
-  api_config_id_prefix = "coway-cfg-"
-  display_name  = "Coway Agent Gateway OpenAPI Config"
+  api_config_id_prefix = "enterprise-cfg-"
+  display_name  = "Enterprise Agent Gateway OpenAPI Config"
   project       = var.project_id
 
   openapi_documents {
@@ -215,7 +215,7 @@ resource "google_api_gateway_api_config" "agent_api_cfg" {
 
 resource "google_api_gateway_gateway" "agent_gateway" {
   provider   = google
-  gateway_id = "coway-meet-gateway"
+  gateway_id = "enterprise-meet-gateway"
   api_config = google_api_gateway_api_config.agent_api_cfg.id
   region     = var.region
   project    = var.project_id
@@ -227,7 +227,7 @@ resource "google_api_gateway_gateway" "agent_gateway" {
 resource "google_cloud_run_service_iam_member" "cloud_run_invoker" {
   location = var.region
   project  = var.project_id
-  service  = "coway-meet-notes-service"
+  service  = "enterprise-meet-notes-service"
   role     = "roles/run.invoker"
   member   = "allUsers"
 }

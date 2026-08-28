@@ -24,7 +24,7 @@ def test_speaker_mapping():
 
     mapping = {
         "[참석자 1]": "홍길동 팀장 (리테일 회사)",
-        "[참석자 2]": "고정현 CE (Google Cloud)"
+        "[참석자 2]": "담당 CE (Google Cloud)"
     }
 
     print("1. 화자 라벨 치환 실행...")
@@ -34,9 +34,9 @@ def test_speaker_mapping():
     assert "[참석자 1]" not in result, "[참석자 1] 치환 누락"
     assert "[참석자 2]" not in result, "[참석자 2] 치환 누락"
     assert "홍길동 팀장 (리테일 회사)" in result, "치환된 이름(홍길동 팀장) 누락"
-    assert "고정현 CE (Google Cloud)" in result, "치환된 이름(고정현 CE) 누락"
+    assert "담당 CE (Google Cloud)" in result, "치환된 이름(담당 CE) 누락"
     assert result.count("홍길동 팀장 (리테일 회사)") == 3, "치환 횟수 불일치 (기대값: 3회)"
-    assert result.count("고정현 CE (Google Cloud)") == 2, "치환 횟수 불일치 (기대값: 2회)"
+    assert result.count("담당 CE (Google Cloud)") == 2, "치환 횟수 불일치 (기대값: 2회)"
 
     # 3. 엣지 케이스 테스트 (빈 매핑, 빈 텍스트)
     assert SpeakerMappingService.replace_speakers("", mapping) == ""

@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
+# ==============================================================================
+# Google Meet API v2 회의 공간 녹화본(Drive 파일) 조회 유틸리티
+# ==============================================================================
+# - 용도: Google Meet 회의방의 클라우드 녹화 파일 목록 및 Drive 다운로드 URL 획득
+# - 경로: gg_meet/get_meeting_recordings.py
+# ==============================================================================
 """
-🎬 Google Meet 회의 녹화본 조회 스크립트 (Simple Recording Checker)
-- 경로: /usr/local/google/home/junghyunko/git/2026-AI/collaborate-portal/gg_meet/get_meeting_recordings.py
 - 지원 조회 방식:
   1. Google Meet API v2 기반 조회 (ConferenceRecords -> Recordings)
   2. Google Drive API v3 기반 조회 (Drive 내 Meet Recordings 영상 파일 검색)

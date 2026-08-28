@@ -23,7 +23,7 @@ from gg_calendar.calendar_service import CalendarService
 # Mock 테스트용 샘플 캘린더 데이터 (실제 리테일 회사-구글 회의 시나리오 반영)
 MOCK_CALENDAR_EVENTS = [
     {
-        "id": "event_coway_meet_20260818",
+        "id": "event_meet_meet_20260818",
         "summary": "리테일 회사 AI 협업포털 회의록 자동화 및 Google Workspace/GCP 연동 기술 미팅",
         "description": "Google Meet 음성/영상 녹화본(16kHz 모노 MP3)을 Vertex AI Gemini 3.7 Flash로 분석하여 1페이지 요약 및 무가공 전사본을 생성하는 기술 아키텍처 검토",
         "start": {"dateTime": "2026-08-18T15:00:00+09:00"},
@@ -35,13 +35,13 @@ MOCK_CALENDAR_EVENTS = [
             ]
         },
         "attendees": [
-            {"displayName": "홍길동 팀장", "email": "yj_kim@coway.com", "responseStatus": "accepted"},
-            {"displayName": "정소영 님", "email": "sy_jung@coway.com", "responseStatus": "accepted"},
-            {"displayName": "이상훈 님", "email": "sh_lee@coway.com", "responseStatus": "accepted"},
-            {"displayName": "고정현 CE", "email": "junghyunko@google.com", "responseStatus": "accepted"},
-            {"displayName": "김진아 FSR", "email": "jina_kim@google.com", "responseStatus": "accepted"},
-            {"displayName": "김원유 Specialist", "email": "wy_kim@google.com", "responseStatus": "accepted"},
-            {"displayName": "IBM 수행사 팀장", "email": "ibm_pm@kr.ibm.com", "responseStatus": "accepted"}
+            {"displayName": "홍길동 팀장", "email": "hong@example.com", "responseStatus": "accepted"},
+            {"displayName": "성춘향 님", "email": "sung@example.com", "responseStatus": "accepted"},
+            {"displayName": "이몽룡 님", "email": "lee@example.com", "responseStatus": "accepted"},
+            {"displayName": "담당 CE", "email": "ce@google.com", "responseStatus": "accepted"},
+            {"displayName": "심청 FSR", "email": "sales@google.com", "responseStatus": "accepted"},
+            {"displayName": "임꺽정 Specialist", "email": "workspace@google.com", "responseStatus": "accepted"},
+            {"displayName": "SI 수행사 팀장", "email": "partner@partner.com", "responseStatus": "accepted"}
         ]
     },
     {
@@ -52,7 +52,7 @@ MOCK_CALENDAR_EVENTS = [
         "end": {"dateTime": "2026-08-19T16:36:00+09:00"},
         "hangoutLink": "https://meet.google.com/t3s-sess-005",
         "attendees": [
-            {"displayName": "고정현 CE", "email": "junghyunko@google.com", "responseStatus": "accepted"}
+            {"displayName": "담당 CE", "email": "ce@google.com", "responseStatus": "accepted"}
         ]
     }
 ]

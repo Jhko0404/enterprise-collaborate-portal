@@ -11,21 +11,21 @@
 
 ## 📋 1. 회의별 실측 검증 데이터 요약
 
-### 📂 [회의 1] [Coway DX센터] GWS api활용 관련 논의
+### 📂 [회의 1] [Enterprise DX센터] GWS api활용 관련 논의
 - **일정**: Tuesday, August 18 ⋅ 3:00 – 5:00pm (실제 진행: 15:03:00 ~ 16:28:37 / **85분 37초**)
-- **회의 기록 ID**: `conferenceRecords/conf-20260818-coway-dx-gws`
-- **회의 Space**: `spaces/coway-gws-dx-api`
+- **회의 기록 ID**: `conferenceRecords/conf-20260818-enterprise-gws`
+- **회의 Space**: `spaces/enterprise-gws-api`
 
 #### 👥 [TC-05] 참가자 및 세션 이력 (총 7명)
 | No | 참석자 이름 / 직책 | 계정 식별 (Email) | 인증 유형 | 최초 입장 | 최종 퇴장 | 세션 체류 시간 |
 |:--:|:---|:---|:---:|:---:|:---:|:---:|
-| 1 | 홍길동 팀장 (리테일 회사 PM) | `yj_kim@coway.com` | signedinUser | 15:03:00 | 16:28:37 | 85분 37초 |
-| 2 | 정소영 님 (리테일 회사) | `sy_jung@coway.com` | signedinUser | 15:03:05 | 16:28:30 | 85분 25초 |
-| 3 | 이상훈 님 (리테일 회사) | `sh_lee@coway.com` | signedinUser | 15:03:10 | 16:28:35 | 85분 25초 |
-| 4 | 고정현 CE (Google Cloud) | `junghyunko@google.com` | signedinUser | 15:02:45 | 16:28:37 | 85분 52초 |
-| 5 | 김진아 FSR (Google Cloud) | `jinakim@google.com` | signedinUser | 15:03:00 | 16:20:00 | 77분 00초 |
-| 6 | 김원유 Specialist (Google Workspace) | `wonyukim@google.com` | signedinUser | 15:05:00 | 16:28:30 | 83분 30초 |
-| 7 | IBM 수행사 팀장 | `partner_ibm@ibm.com` | signedinUser | 15:03:15 | 16:28:35 | 85분 20초 |
+| 1 | 홍길동 팀장 (리테일 회사 PM) | `hong@example.com` | signedinUser | 15:03:00 | 16:28:37 | 85분 37초 |
+| 2 | 성춘향 님 (리테일 회사) | `sung@example.com` | signedinUser | 15:03:05 | 16:28:30 | 85분 25초 |
+| 3 | 이몽룡 님 (리테일 회사) | `lee@example.com` | signedinUser | 15:03:10 | 16:28:35 | 85분 25초 |
+| 4 | 담당 CE (Google Cloud) | `ce@google.com` | signedinUser | 15:02:45 | 16:28:37 | 85분 52초 |
+| 5 | 심청 FSR (Google Cloud) | `sales@google.com` | signedinUser | 15:03:00 | 16:20:00 | 77분 00초 |
+| 6 | 임꺽정 Specialist (Google Workspace) | `workspace@google.com` | signedinUser | 15:05:00 | 16:28:30 | 83분 30초 |
+| 7 | SI 수행사 팀장 | `partner@partner.com` | signedinUser | 15:03:15 | 16:28:35 | 85분 20초 |
 
 #### 🎬 [TC-06] 녹화본 아티팩트 및 Drive File ID
 - **감지된 녹화본**: **0개 (녹화본 없음)**
@@ -41,7 +41,7 @@
 #### 👥 [TC-05] 참가자 및 세션 이력 (총 2명)
 | No | 참석자 이름 / 직책 | 계정 식별 (Email) | 인증 유형 | 최초 입장 | 최종 퇴장 | 세션 체류 시간 |
 |:--:|:---|:---|:---:|:---:|:---:|:---:|
-| 1 | 고정현 CE (Google Cloud) | `junghyunko@google.com` | signedinUser | 11:30:00 | 12:03:22 | 33분 22초 |
+| 1 | 담당 CE (Google Cloud) | `ce@google.com` | signedinUser | 11:30:00 | 12:03:22 | 33분 22초 |
 | 2 | Project Elevate Cohort Member | `cohort_member@google.com` | signedinUser | 11:31:10 | 12:03:15 | 32분 05초 |
 
 #### 🎬 [TC-06] 녹화본 아티팩트 및 Drive File ID

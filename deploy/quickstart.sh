@@ -150,7 +150,7 @@ GATEWAY_URL=$(gcloud api-gateway gateways describe "${GATEWAY_ID}" \
 
 echo ""
 echo "=================================================================="
-echo "🎉 [Coway AI 협업포털 배포 완료!]"
+echo "🎉 [Enterprise AI 협업포털 배포 완료!]"
 echo "=================================================================="
 echo "🌐 서비스 접속 URL : https://${GATEWAY_URL}"
 echo "📍 Cloud Run 백엔드: 비공개 보호 완료 (Zero-Trust IAM 연동)"

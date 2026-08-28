@@ -3,11 +3,11 @@ const API_BASE = window.location.origin;
 
 let activeTranscript = [];
 let sampleSources = {
-  coway_meet_85min: {
+  sample_meet_85min: {
     title: "리테일 회사 AI 협업포털 회의록 자동화 및 Google Workspace/GCP 연동 기술 미팅",
     date: "2026-08-18",
     time: "15:00 ~ 16:30 (총 85분)",
-    attendees: "홍길동 팀장 (리테일 회사 PM), 정소영 님 (리테일 회사), 이상훈 님 (리테일 회사), 고정현 CE (Google Cloud), 김진아 FSR (Google Cloud), 김원유 Specialist (Google Workspace), IBM 수행사 팀장",
+    attendees: "홍길동 팀장 (리테일 회사 PM), 성춘향 님 (리테일 회사), 이몽룡 님 (리테일 회사), 담당 CE (Google Cloud), 심청 FSR (Google Cloud), 임꺽정 Specialist (Google Workspace), SI 수행사 팀장",
     executive_summary: "리테일 회사 임직원이 Google Calendar/Meet을 통해 진행한 회의 녹화본 및 음성 스트림(16kHz Mono MP3)을 Vertex AI Gemini 3.7 Flash 모델로 분석하여, '1페이지 구조화 회의록'과 '100% 무가공 대화 전체 스크립트(화자 분리 전문)'의 2대 산출물을 자동 생성하고 협업포털 및 Google Docs로 연동 배포하는 방안을 확정함.",
     key_decisions: [
       "사용자 시나리오 1 채택: 캘린더/모바일에서 평소대로 회의 진행 후 포털에서 원클릭으로 회의록 생성",
@@ -26,7 +26,7 @@ let sampleSources = {
           "비교 결과: 새로운 툴 학습 부담이 없고 모바일 접근성이 뛰어난 시나리오 1을 공식 표준 방향으로 확정"
         ],
         resolution: "기존 Google Calendar/Meet 워크플로우를 100% 유지하는 시나리오 1 공식 채택",
-        speakers: ["고정현 CE (Google Cloud)", "홍길동 팀장 (리테일 회사)"]
+        speakers: ["담당 CE (Google Cloud)", "홍길동 팀장 (리테일 회사)"]
       },
       {
         title: "2. 회의실 단일 마이크 환경 화자 분리(Diarization) 한계 극복",
@@ -38,7 +38,7 @@ let sampleSources = {
           "미식별 화자 발생 시 웹 UI에서 1-Click으로 이름을 일괄 변경할 수 있는 '화자 일괄 치환(Replace All)' 인터페이스 제공"
         ],
         resolution: "Gemini 3.7 Flash 오디오 Diarization + 캘린더 참석자 매핑 + UI 1-Click 일괄 치환의 3단계 복합 아키텍처 확정",
-        speakers: ["이상훈 님 (리테일 회사)", "고정현 CE (Google Cloud)", "정소영 님 (리테일 회사)"]
+        speakers: ["이몽룡 님 (리테일 회사)", "담당 CE (Google Cloud)", "성춘향 님 (리테일 회사)"]
       },
       {
         title: "3. Google Workspace DWD 권한 및 서비스 계정 연동",
@@ -50,13 +50,13 @@ let sampleSources = {
           "임시 음성 파일은 GCS 전용 버킷에 보관 후 1일 만료 TTL 자동 삭제 정책 적용"
         ],
         resolution: "서비스 계정 DWD 방식 도입 및 24시간 TTL 자동 삭제 보안 정책 수립",
-        speakers: ["김원유 Specialist (Google Workspace)", "IBM 수행사 팀장", "홍길동 팀장 (리테일 회사)"]
+        speakers: ["임꺽정 Specialist (Google Workspace)", "SI 수행사 팀장", "홍길동 팀장 (리테일 회사)"]
       }
     ],
     action_items: [
-      { task: "Gemini 3.7 Flash 기반 다중 화자 분리 & 무가공 전사 PoC 검증 결과 공유", assignee: "고정현 CE (Google Cloud)", due: "2026-08-25", status: "IN_PROGRESS" },
-      { task: "협업포털 화면 UI 및 Cloud Tasks 비동기 큐 연동 설계서 작성", assignee: "IBM 수행사 팀장", due: "2026-08-28", status: "TODO" },
-      { task: "사내 회의 유형별 표준 템플릿(CFT 정기, 임원보고 등) 양식 정의", assignee: "정소영 님 (리테일 회사)", due: "2026-08-29", status: "TODO" }
+      { task: "Gemini 3.7 Flash 기반 다중 화자 분리 & 무가공 전사 PoC 검증 결과 공유", assignee: "담당 CE (Google Cloud)", due: "2026-08-25", status: "IN_PROGRESS" },
+      { task: "협업포털 화면 UI 및 Cloud Tasks 비동기 큐 연동 설계서 작성", assignee: "SI 수행사 팀장", due: "2026-08-28", status: "TODO" },
+      { task: "사내 회의 유형별 표준 템플릿(CFT 정기, 임원보고 등) 양식 정의", assignee: "성춘향 님 (리테일 회사)", due: "2026-08-29", status: "TODO" }
     ]
   }
 };
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadReportsArchive();
 });
 
-async function fetchDynamicTranscript(sampleKey = "coway_meet_85min") {
+async function fetchDynamicTranscript(sampleKey = "sample_meet_85min") {
   try {
     const res = await fetch(`${API_BASE}/api/v1/notes/current?sample=${encodeURIComponent(sampleKey)}`);
     if (res.ok) {
@@ -736,11 +736,11 @@ function renderNotes() {
 
 function getSpeakerPillClass(speaker) {
   if (!speaker) return "generic-spk";
-  if (speaker.includes("홍길동") || speaker.includes("리테일 회사 PM")) return "coway-pm";
+  if (speaker.includes("홍길동") || speaker.includes("리테일 회사 PM")) return "client-pm";
   if (speaker.includes("고정현") || speaker.includes("Google Cloud")) return "google-ce";
-  if (speaker.includes("이상훈") || speaker.includes("정소영")) return "coway-eng";
-  if (speaker.includes("IBM")) return "partner-ibm";
-  if (speaker.includes("김원유") || speaker.includes("Workspace")) return "workspace-spec";
+  if (speaker.includes("이몽룡") || speaker.includes("성춘향")) return "client-eng";
+  if (speaker.includes("SI 수행사")) return "partner-si";
+  if (speaker.includes("임꺽정") || speaker.includes("Workspace")) return "workspace-spec";
   return "generic-spk";
 }
 
@@ -1112,14 +1112,14 @@ function openSpeakerModal() {
       spkList.forEach((spk, idx) => {
         let suggestedTo = "";
         if (idx === 0) suggestedTo = "홍길동 팀장 (리테일 회사)";
-        else if (idx === 1) suggestedTo = "고정현 CE (Google Cloud)";
-        else if (idx === 2) suggestedTo = "김원유 Specialist (Google Workspace)";
+        else if (idx === 1) suggestedTo = "담당 CE (Google Cloud)";
+        else if (idx === 2) suggestedTo = "임꺽정 Specialist (Google Workspace)";
         addSpeakerMapRow(spk, suggestedTo);
       });
     } else {
       // 감지된 화자가 없을 경우 기본 2행 제공
       addSpeakerMapRow("[참석자 1]", "홍길동 팀장 (리테일 회사)");
-      addSpeakerMapRow("[참석자 2]", "고정현 CE (Google Cloud)");
+      addSpeakerMapRow("[참석자 2]", "담당 CE (Google Cloud)");
     }
   }
 
@@ -1696,8 +1696,8 @@ async function handleGenerate(event) {
         startSttPolling(activeReportId);
       }
     } else {
-      const sampleVal = document.getElementById("sampleSelect")?.value || "coway_meet_85min";
-      activeNotes = sampleSources[sampleVal] || sampleSources.coway_meet_85min;
+      const sampleVal = document.getElementById("sampleSelect")?.value || "sample_meet_85min";
+      activeNotes = sampleSources[sampleVal] || sampleSources.sample_meet_85min;
       await fetchDynamicTranscript(sampleVal);
       renderAll();
       switchTab("notesTab");

@@ -11,7 +11,7 @@ from app.core.auth_utils import get_google_credentials
 
 def run_all_tests():
     print("==================================================================")
-    print("🚀 [COWAY AI PORTAL] 신규 기능 및 최적화 단위 테스트 시작")
+    print("🚀 [ENTERPRISE AI PORTAL] 신규 기능 및 최적화 단위 테스트 시작")
     print("==================================================================")
 
     client = TestClient(app)
@@ -26,8 +26,8 @@ def run_all_tests():
     )
     mapping = {
         "[참석자 1]": "홍길동 팀장 (리테일 회사)",
-        "[화자 2]": "고정현 CE (Google Cloud)",
-        "Speaker 3": "김원유 Specialist (Google Workspace)"
+        "[화자 2]": "담당 CE (Google Cloud)",
+        "Speaker 3": "임꺽정 Specialist (Google Workspace)"
     }
     
     # 1-1. 서비스 계층 테스트
@@ -36,8 +36,8 @@ def run_all_tests():
     assert "[화자 2]" not in res_text, "화자 2 치환 실패"
     assert "Speaker 3" not in res_text, "Speaker 3 치환 실패"
     assert "홍길동 팀장 (리테일 회사)" in res_text
-    assert "고정현 CE (Google Cloud)" in res_text
-    assert "김원유 Specialist (Google Workspace)" in res_text
+    assert "담당 CE (Google Cloud)" in res_text
+    assert "임꺽정 Specialist (Google Workspace)" in res_text
     print("   ✅ Service 계층 커스텀 화자 다중 치환 성공")
 
     # 1-2. REST API 엔드포인트 테스트
@@ -66,13 +66,13 @@ def run_all_tests():
         "duration_minutes": 45,
         "template_type": "CFT_REGULAR",
         "template_name": "CFT 정기 회의",
-        "attendees": "홍길동 팀장, 고정현 CE",
+        "attendees": "홍길동 팀장, 담당 CE",
         "summary_snippet": "단위 테스트 검증용 1페이지 요약입니다.",
         "executive_summary": "단위 테스트 검증용 상세 요약 내용입니다.",
         "key_decisions": ["SimSolid PoC 진행 합의"],
-        "agendas": [{"title": "안건 1", "summary": "테스트 요약", "content": "내용", "speakers": ["고정현 CE"]}],
-        "action_items": [{"task": "아키텍처 문서화", "assignee": "고정현 CE", "due": "2026-08-30", "status": "TODO"}],
-        "transcript": [{"time": "[00:00:00]", "speaker": "고정현 CE", "text": "안녕하세요"}],
+        "agendas": [{"title": "안건 1", "summary": "테스트 요약", "content": "내용", "speakers": ["담당 CE"]}],
+        "action_items": [{"task": "아키텍처 문서화", "assignee": "담당 CE", "due": "2026-08-30", "status": "TODO"}],
+        "transcript": [{"time": "[00:00:00]", "speaker": "담당 CE", "text": "안녕하세요"}],
         "created_at": "2026-08-28 10:00:00",
         "status": "COMPLETED",
         "audio_source": "로컬 파일 업로드 (test.mp3)"
@@ -117,7 +117,7 @@ def run_all_tests():
     # Test 3: Cloud Run 환경 인증 자격 (ADC) 초고속 획득 검증
     # -------------------------------------------------------------
     print("\n[Test 3] 🛡️ Cloud Run 환경 감지 시 0ms 직결 ADC 인증 자격 획득 검증...")
-    os.environ["K_SERVICE"] = "coway-meet-notes-service"
+    os.environ["K_SERVICE"] = "enterprise-meet-notes-service"
     start_auth_t = time.time()
     creds = get_google_credentials()
     auth_elapsed_ms = (time.time() - start_auth_t) * 1000

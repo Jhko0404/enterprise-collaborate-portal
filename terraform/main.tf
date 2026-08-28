@@ -66,7 +66,7 @@ resource "google_artifact_registry_repository" "docker_repo" {
   project       = var.project_id
   location      = var.region
   repository_id = var.artifact_repo_name
-  description   = "Docker repository for Coway Meet Notes AI Processor"
+  description   = "Docker repository for Enterprise Meet Notes AI Processor"
   format        = "DOCKER"
 
   depends_on = [google_project_service.enabled_apis]
@@ -101,7 +101,7 @@ resource "google_cloud_tasks_queue" "meeting_notes_queue" {
 # ==============================================================================
 resource "google_bigquery_dataset" "portal_analytics" {
   dataset_id                  = var.bigquery_dataset_id
-  friendly_name               = "Coway Portal AI Analytics"
+  friendly_name               = "Enterprise Portal AI Analytics"
   description                 = "Dataset for audit logs and user feedback on AI Meeting Notes"
   location                    = "US"
   project                     = var.project_id
@@ -186,7 +186,7 @@ EOF
 # ==============================================================================
 resource "google_service_account" "processor_sa" {
   account_id   = var.service_account_id
-  display_name = "Coway Meet Notes AI Processor Service Account"
+  display_name = "Enterprise Meet Notes AI Processor Service Account"
   project      = var.project_id
 
   depends_on = [google_project_service.enabled_apis]

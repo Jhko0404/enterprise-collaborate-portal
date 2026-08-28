@@ -15,14 +15,14 @@ import time
 import subprocess
 import requests
 
-INPUT_FILE = "/usr/local/google/home/junghyunko/git/2026-AI/collaborate-portal/data/input_media/[AI Live+Labs] Speakers_Supporters Briefing (KR) - 2026_07_10 15_58 KST - Recording.mp4"
-PROJECT_ID = "project-elevate-007"
-BUCKET_NAME = "project-elevate-007-meet-audio-temp"
-GATEWAY_URL = "https://coway-agent-gateway-7p7fk8nj.uc.gateway.dev"
+INPUT_FILE = os.environ.get("INPUT_MEDIA_FILE", "data/input_media/sample.mp4")
+PROJECT_ID = os.environ.get("GCP_PROJECT_ID", "your-gcp-project-id")
+BUCKET_NAME = os.environ.get("TEMP_GCS_BUCKET", f"{PROJECT_ID}-meet-audio-temp")
+GATEWAY_URL = os.environ.get("GATEWAY_URL", "https://enterprise-agent-gateway.uc.gateway.dev")
 
 def main():
     print("=" * 70)
-    print("🚀 [COWAY AI PORTAL] E2E 미디어 분석 및 STT 품질 검증 테스트")
+    print("🚀 [ENTERPRISE AI PORTAL] E2E 미디어 분석 및 STT 품질 검증 테스트")
     print("=" * 70)
 
     if not os.path.exists(INPUT_FILE):
@@ -56,7 +56,7 @@ def main():
         "filename": filename,
         "title": "[AI Live+Labs] Speakers & Supporters Briefing",
         "template_type": "CFT_REGULAR",
-        "attendees": "고정현 CE, 크리스틴, 김창재, 세리"
+        "attendees": "담당 CE, 크리스틴, 김창재, 세리"
     }
     
     print("\n⚡ 2. Gemini 3.7 Flash 회의록 생성 요청 (Fast-Path API 호출)...")

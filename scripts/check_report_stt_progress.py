@@ -12,11 +12,11 @@ import json
 import subprocess
 import requests
 
-API_GATEWAY = "https://coway-agent-gateway-7p7fk8nj.uc.gateway.dev"
+API_GATEWAY = "https://enterprise-agent-gateway.uc.gateway.dev"
 
 def check_progress(search_term=""):
     print("=" * 70)
-    print("🔍 [COWAY AI PORTAL] 회의록 및 비동기 STT 진행 상황 실시간 진단")
+    print("🔍 [ENTERPRISE AI PORTAL] 회의록 및 비동기 STT 진행 상황 실시간 진단")
     print("=" * 70)
 
     # 1. 보관함 전체 목록 조회
@@ -126,7 +126,7 @@ def check_progress(search_term=""):
     try:
         cmd = [
             "gcloud", "logging", "read",
-            'resource.type="cloud_run_revision" AND resource.labels.service_name="coway-meet-notes-service"',
+            'resource.type="cloud_run_revision" AND resource.labels.service_name="enterprise-meet-notes-service"',
             "--limit=15",
             "--project=project-elevate-007",
             "--format=table(timestamp,textPayload)"

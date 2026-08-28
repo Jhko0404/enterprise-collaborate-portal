@@ -130,7 +130,7 @@ curl -s "https://YOUR_GATEWAY.gateway.dev/api/v1/reports"
 ### 5.1. 실시간 로그 모니터링 (Cloud Logging)
 ```bash
 # Cloud Run 실시간 로그 스트리밍
-gcloud logging tail 'resource.type="cloud_run_revision" AND resource.labels.service_name="coway-meet-notes-service"' --project=YOUR_GCP_PROJECT_ID
+gcloud logging tail 'resource.type="cloud_run_revision" AND resource.labels.service_name="enterprise-meet-notes-service"' --project=YOUR_GCP_PROJECT_ID
 
 # 특정 리포트의 STT 진행 로그 추적
 gcloud logging read 'resource.type="cloud_run_revision" AND textPayload=~"[Cloud STT]"' --limit=30 --project=YOUR_GCP_PROJECT_ID

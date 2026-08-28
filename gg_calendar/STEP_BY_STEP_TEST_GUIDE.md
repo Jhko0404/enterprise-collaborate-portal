@@ -1,6 +1,6 @@
 # 📋 Google Calendar API v3 단계별 실전 테스트 가이드 (Altostrat 계정 기준)
 
-> **대상 계정**: `admin@junghyunko.altostrat.com`  
+> **대상 계정**: `admin@company.com`  
 > **대상 프로젝트**: `project-elevate-007` (GCP)  
 > **목적**: 사내 보안 정책(CAA) 제약 없이 100% 안전하게 Google Calendar API와 Google Meet을 연동하여 회의 일정, 참석자 명단, Meet 화상회의 코드를 수집하고 AI 회의록 파이프라인에 연결합니다.
 
@@ -20,15 +20,15 @@ flowchart LR
 ## 1️⃣ Step 1: Altostrat 캘린더에 테스트 회의 등록 (1분)
 
 1. 웹 브라우저에서 **[Google Calendar](https://calendar.google.com)**에 접속합니다.
-   * *반드시 **`admin@junghyunko.altostrat.com`** 계정으로 로그인되어 있는지 확인합니다.*
+   * *반드시 **`admin@company.com`** 계정으로 로그인되어 있는지 확인합니다.*
 2. 오늘 또는 내일 날짜에 **`[+ 만들기]` ➔ `[이벤트]`**를 클릭합니다.
 3. 아래 정보를 입력하고 저장합니다:
    * **제목**: `리테일 회사 AI 협업포털 회의록 자동화 기술 미팅`
    * **화상 회의**: **`[Google Meet 화상 회의 추가]`** 버튼 클릭 (중요 ⭐)
    * **참석자 추가**: 
-     - `junghyunko@google.com`
-     - `yj_kim@coway.com`
-     - `sy_jung@coway.com`
+     - `ce@google.com`
+     - `hong@example.com`
+     - `sung@example.com`
    * **설명**: `Google Meet 녹화본과 Vertex AI Gemini 3.7 Flash를 활용한 다중 화자 분리 및 실시간 전사 회의록 자동화 아키텍처 검토`
 4. **`[저장]`**을 클릭합니다.
 
@@ -38,12 +38,12 @@ flowchart LR
 
 1. 터미널(프로젝트 루트 디렉토리)에서 아래 명령어를 실행합니다:
    ```bash
-   cd /usr/local/google/home/junghyunko/git/2026-AI/collaborate-portal
+   cd enterprise-collaborate-portal
    .venv/bin/python gg_calendar/test_calendar_api.py --mode live
    ```
 2. 자동으로 브라우저에 **Google 로그인 창**이 열립니다.
-3. **`admin@junghyunko.altostrat.com`** 계정을 선택합니다.
-4. **"Coway-Meet-AI-Portal에서 Google 계정에 액세스하려고 합니다"** 동의 화면에서 **`[계속]`** 및 **`[허용(Allow)]`**을 클릭합니다.
+3. **`admin@company.com`** 계정을 선택합니다.
+4. **"Enterprise-Meet-AI-Portal에서 Google 계정에 액세스하려고 합니다"** 동의 화면에서 **`[계속]`** 및 **`[허용(Allow)]`**을 클릭합니다.
 5. 브라우저에 `"The authentication flow has completed. You may close this tab."` 메시지가 뜨면 인증 완료!
 6. 프로젝트 루트에 **`token.json`** 파일이 자동 생성됩니다.
 
@@ -64,7 +64,7 @@ flowchart LR
 
 • 📌 [2026-08-19T15:00:00+09:00] 리테일 회사 AI 협업포털 회의록 자동화 기술 미팅
    - Meet 링크: https://meet.google.com/xxx-yyyy-zzz
-   - 참석자 (4명): admin@junghyunko.altostrat.com, junghyunko@google.com, yj_kim@coway.com 외
+   - 참석자 (4명): admin@company.com, ce@google.com, hong@example.com 외
 ```
 
 ---

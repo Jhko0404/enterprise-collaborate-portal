@@ -5,7 +5,7 @@ class SpeakerMappingService:
     def replace_speakers(text: str, mapping: Dict[str, str]) -> str:
         """
         미확정 화자 라벨([참석자 1], [참석자 2])을 실제 참석자 이름으로 일괄 치환
-        예: mapping = {"[참석자 1]": "홍길동 팀장", "[참석자 2]": "이상훈 담당"}
+        예: mapping = {"[참석자 1]": "홍길동 팀장", "[참석자 2]": "이몽룡 담당"}
         """
         if not mapping or not text:
             return text

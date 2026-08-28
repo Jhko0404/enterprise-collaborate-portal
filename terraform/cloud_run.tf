@@ -1,8 +1,8 @@
 # ==============================================================================
-# Cloud Run Service for Coway AI Meeting Notes Processor
+# Cloud Run Service for Enterprise AI Meeting Notes Processor
 # ==============================================================================
 resource "google_cloud_run_v2_service" "meet_notes_service" {
-  name     = "coway-meet-notes-service"
+  name     = "enterprise-meet-notes-service"
   location = var.region
   project  = var.project_id
   ingress  = "INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER" # Company Security Org Policy
@@ -17,7 +17,7 @@ resource "google_cloud_run_v2_service" "meet_notes_service" {
     }
 
     containers {
-      image = "us-central1-docker.pkg.dev/${var.project_id}/cloud-run-source-deploy/coway-meet-notes-service:latest"
+      image = "us-central1-docker.pkg.dev/${var.project_id}/cloud-run-source-deploy/enterprise-meet-notes-service:latest"
 
       resources {
         limits = {

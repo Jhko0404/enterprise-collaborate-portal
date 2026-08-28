@@ -28,7 +28,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
 app = FastAPI(
-    title="Coway AI Meeting Notes & Speaker Diarization API",
+    title="Enterprise AI Meeting Notes & Speaker Diarization API",
     description="Google Meet 영상 및 로컬 파일 기반 다중 화자 분리 및 맞춤형 회의록 생성 백엔드",
     version="1.0.0"
 )
@@ -125,7 +125,7 @@ def serve_ui():
             }
         )
     return {
-        "service": "Coway AI Meeting Notes API",
+        "service": "Enterprise AI Meeting Notes API",
         "model": settings.GEMINI_MODEL_NAME,
         "project": settings.GCP_PROJECT_ID,
         "status": "HEALTHY"
@@ -136,7 +136,7 @@ def serve_ui():
 def health_check():
     """헬스체크 및 모델 정보 반환"""
     return {
-        "service": "Coway AI Meeting Notes API",
+        "service": "Enterprise AI Meeting Notes API",
         "model": settings.GEMINI_MODEL_NAME,
         "project": settings.GCP_PROJECT_ID,
         "status": "HEALTHY"
@@ -148,7 +148,7 @@ def gateway_status():
     return {
         "status": "HEALTHY",
         "gateway": {
-            "name": "Coway Agent Gateway",
+            "name": "Enterprise Agent Gateway",
             "version": "1.0.0",
             "type": "Google Cloud API Gateway / External Security Proxy",
             "cloud_run_backend": settings.CLOUD_RUN_SERVICE_URL,
@@ -844,7 +844,7 @@ def clear_logs_endpoint():
 
 
 @app.get("/api/v1/notes/current")
-def get_current_meeting_notes(sample: Optional[str] = "coway_meet_85min"):
+def get_current_meeting_notes(sample: Optional[str] = "sample_meet_85min"):
     """
     현재 등록된 회의의 구조화 회의록 및 100% 무가공 대화 전사(Verbatim) 전문 반환
     """
@@ -852,12 +852,12 @@ def get_current_meeting_notes(sample: Optional[str] = "coway_meet_85min"):
     root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     
     candidate_paths = [
-        os.path.join(root_dir, "data", "samples", "coway_meeting_transcript_20260818.md"),
-        os.path.join(root_dir, "data", "outputs", "transcripts", "coway_meeting_transcript_20260818.md"),
-        os.path.join(root_dir, "coway_meeting_transcript_20260818.md")
+        os.path.join(root_dir, "data", "samples", "meeting_transcript_20260818.md"),
+        os.path.join(root_dir, "data", "outputs", "transcripts", "meeting_transcript_20260818.md"),
+        os.path.join(root_dir, "meeting_transcript_20260818.md")
     ]
     transcript_path = next((p for p in candidate_paths if os.path.exists(p)), None)
-    meeting_id = "meet-20260818-coway-ai"
+    meeting_id = "meet-20260818-sample-ai"
     
     turns = []
     pattern = re.compile(r"^\[\s*(\d{1,2}:\d{2}(?::\d{2})?)\s*\]\s*([^:]+):\s*(.*)$")
@@ -1176,7 +1176,7 @@ async def upload_file_chunk(
     대용량 미디어 파일(50MB~2GB+) 분할 청크 업로드 엔드포인트
     API Gateway 32MB 단일 페이로드 제한을 완벽하게 우회하여 대용량 비디오/오디오를 안정적으로 처리
     """
-    upload_dir = os.path.join("/tmp", "coway_uploads", upload_id)
+    upload_dir = os.path.join("/tmp", "enterprise_uploads", upload_id)
     os.makedirs(upload_dir, exist_ok=True)
     
     part_path = os.path.join(upload_dir, f"part_{chunk_index:05d}")
@@ -1275,7 +1275,7 @@ def get_upload_session(req: ResumableSessionRequest, request: Request):
     브라우저가 대용량(100MB~5GB) 미디어를 백엔드 경유 없이 GCS 버킷으로 직접 다이렉트 업로드할 수 있도록 지원합니다.
     """
     try:
-        origin = req.origin or request.headers.get("origin") or "https://coway-agent-gateway-7p7fk8nj.uc.gateway.dev"
+        origin = req.origin or request.headers.get("origin") or "https://enterprise-agent-gateway.uc.gateway.dev"
         session_info = GCSStorageService.create_resumable_upload_session(
             filename=req.filename,
             content_type=req.content_type,
@@ -1389,7 +1389,7 @@ def process_gcs_media(req: ProcessGCSMediaRequest):
 def process_uploaded_media(
     file: UploadFile = File(...),
     title: str = Form("리테일 회사 AI 기술 미팅"),
-    attendees: str = Form("홍길동 팀장, 이상훈 담당, 고정현 CE"),
+    attendees: str = Form("홍길동 팀장, 이몽룡 담당, 담당 CE"),
     template_type: str = Form("CFT_REGULAR")
 ):
     """
