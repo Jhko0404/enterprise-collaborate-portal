@@ -23,7 +23,7 @@ flowchart LR
    * *반드시 **`admin@junghyunko.altostrat.com`** 계정으로 로그인되어 있는지 확인합니다.*
 2. 오늘 또는 내일 날짜에 **`[+ 만들기]` ➔ `[이벤트]`**를 클릭합니다.
 3. 아래 정보를 입력하고 저장합니다:
-   * **제목**: `코웨이 AI 협업포털 회의록 자동화 기술 미팅`
+   * **제목**: `리테일 회사 AI 협업포털 회의록 자동화 기술 미팅`
    * **화상 회의**: **`[Google Meet 화상 회의 추가]`** 버튼 클릭 (중요 ⭐)
    * **참석자 추가**: 
      - `junghyunko@google.com`
@@ -62,7 +62,7 @@ flowchart LR
 📅 [Google Calendar] 다가오는 10개 회의 일정 조회 중...
 총 1개의 일정을 발견했습니다:
 
-• 📌 [2026-08-19T15:00:00+09:00] 코웨이 AI 협업포털 회의록 자동화 기술 미팅
+• 📌 [2026-08-19T15:00:00+09:00] 리테일 회사 AI 협업포털 회의록 자동화 기술 미팅
    - Meet 링크: https://meet.google.com/xxx-yyyy-zzz
    - 참석자 (4명): admin@junghyunko.altostrat.com, junghyunko@google.com, yj_kim@coway.com 외
 ```

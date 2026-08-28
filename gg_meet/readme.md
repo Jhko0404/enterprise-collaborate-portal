@@ -149,7 +149,7 @@ for record in records:
 
 ---
 
-## 🔄 5. 코웨이 협업포털 AI 회의록 시스템과의 결합 워크플로우
+## 🔄 5. 리테일 회사 협업포털 AI 회의록 시스템과의 결합 워크플로우
 
 1. **자동 감지**: 사용자가 Google Calendar 또는 Google Meet에서 회의를 진행하고 녹화를 종료.
 2. **API 연동**: `ConferenceRecordsServiceClient.list_recordings()`를 호출하여 `driveDestination.file` 획득.

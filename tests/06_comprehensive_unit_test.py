@@ -25,7 +25,7 @@ def run_all_tests():
         "[참석자 1]은 AI 시스템 아키텍처를 제안했고, Speaker 3은 이에 동의했습니다."
     )
     mapping = {
-        "[참석자 1]": "홍길동 팀장 (코웨이)",
+        "[참석자 1]": "홍길동 팀장 (리테일 회사)",
         "[화자 2]": "고정현 CE (Google Cloud)",
         "Speaker 3": "김원유 Specialist (Google Workspace)"
     }
@@ -35,7 +35,7 @@ def run_all_tests():
     assert "[참석자 1]" not in res_text, "참석자 1 치환 실패"
     assert "[화자 2]" not in res_text, "화자 2 치환 실패"
     assert "Speaker 3" not in res_text, "Speaker 3 치환 실패"
-    assert "홍길동 팀장 (코웨이)" in res_text
+    assert "홍길동 팀장 (리테일 회사)" in res_text
     assert "고정현 CE (Google Cloud)" in res_text
     assert "김원유 Specialist (Google Workspace)" in res_text
     print("   ✅ Service 계층 커스텀 화자 다중 치환 성공")
@@ -48,7 +48,7 @@ def run_all_tests():
     assert res_api.status_code == 200
     api_json = res_api.json()
     assert api_json.get("status") == "SUCCESS"
-    assert "홍길동 팀장 (코웨이)" in api_json.get("updated_markdown")
+    assert "홍길동 팀장 (리테일 회사)" in api_json.get("updated_markdown")
     print("   ✅ API POST /api/v1/notes/replace-speakers 엔드포인트 응답 검증 성공")
 
     # -------------------------------------------------------------
@@ -60,7 +60,7 @@ def run_all_tests():
     test_report_id = "report-test-unit-001"
     test_report = {
         "id": test_report_id,
-        "title": "단위 테스트 코웨이 기술 미팅",
+        "title": "단위 테스트 리테일 회사 기술 미팅",
         "date": "2026-08-28",
         "time": "10:00 (총 45분)",
         "duration_minutes": 45,
@@ -93,7 +93,7 @@ def run_all_tests():
     print(f"   ✅ GET /api/v1/reports 목록 조회 성공 (응답 지연시간: {elapsed_ms:.2f}ms - 초고속 검증 통과)")
 
     # 2-2. 검색 및 템플릿 필터링 테스트
-    res_search = client.get("/api/v1/reports?search=코웨이")
+    res_search = client.get("/api/v1/reports?search=리테일 회사")
     assert res_search.status_code == 200
     assert len(res_search.json().get("reports", [])) >= 1
     print("   ✅ 키워드 검색 필터링 정상 동작 확인")

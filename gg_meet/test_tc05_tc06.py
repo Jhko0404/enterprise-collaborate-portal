@@ -32,7 +32,7 @@ MEETINGS_DATA = [
             {
                 "name": "conferenceRecords/conf-20260818-coway-dx-gws/participants/p-01",
                 "user_type": "signedinUser",
-                "display_name": "홍길동 팀장 (코웨이 PM)",
+                "display_name": "홍길동 팀장 (리테일 회사 PM)",
                 "email": "yj_kim@coway.com",
                 "earliest_start_time": "2026-08-18T15:03:00+09:00",
                 "latest_end_time": "2026-08-18T16:28:37+09:00",
@@ -43,7 +43,7 @@ MEETINGS_DATA = [
             {
                 "name": "conferenceRecords/conf-20260818-coway-dx-gws/participants/p-02",
                 "user_type": "signedinUser",
-                "display_name": "정소영 님 (코웨이)",
+                "display_name": "정소영 님 (리테일 회사)",
                 "email": "sy_jung@coway.com",
                 "earliest_start_time": "2026-08-18T15:03:05+09:00",
                 "latest_end_time": "2026-08-18T16:28:30+09:00",
@@ -54,7 +54,7 @@ MEETINGS_DATA = [
             {
                 "name": "conferenceRecords/conf-20260818-coway-dx-gws/participants/p-03",
                 "user_type": "signedinUser",
-                "display_name": "이상훈 님 (코웨이)",
+                "display_name": "이상훈 님 (리테일 회사)",
                 "email": "sh_lee@coway.com",
                 "earliest_start_time": "2026-08-18T15:03:10+09:00",
                 "latest_end_time": "2026-08-18T16:28:35+09:00",

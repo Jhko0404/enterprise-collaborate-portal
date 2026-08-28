@@ -57,9 +57,9 @@ def run_mock_test():
     }
     
     mock_participants = [
-        {"name": f"{mock_conf_record['name']}/participants/p001", "signedinUser": {"user": "users/kim-yujin", "displayName": "홍길동 팀장 (코웨이)"}, "earliestStartTime": "2026-08-18T15:03:00Z"},
-        {"name": f"{mock_conf_record['name']}/participants/p002", "signedinUser": {"user": "users/lee-sanghun", "displayName": "이상훈 담당 (코웨이)"}, "earliestStartTime": "2026-08-18T15:03:02Z"},
-        {"name": f"{mock_conf_record['name']}/participants/p003", "signedinUser": {"user": "users/jung-soyoung", "displayName": "정소영 님 (코웨이)"}, "earliestStartTime": "2026-08-18T15:03:05Z"},
+        {"name": f"{mock_conf_record['name']}/participants/p001", "signedinUser": {"user": "users/kim-yujin", "displayName": "홍길동 팀장 (리테일 회사)"}, "earliestStartTime": "2026-08-18T15:03:00Z"},
+        {"name": f"{mock_conf_record['name']}/participants/p002", "signedinUser": {"user": "users/lee-sanghun", "displayName": "이상훈 담당 (리테일 회사)"}, "earliestStartTime": "2026-08-18T15:03:02Z"},
+        {"name": f"{mock_conf_record['name']}/participants/p003", "signedinUser": {"user": "users/jung-soyoung", "displayName": "정소영 님 (리테일 회사)"}, "earliestStartTime": "2026-08-18T15:03:05Z"},
         {"name": f"{mock_conf_record['name']}/participants/p004", "signedinUser": {"user": "users/junghyunko", "displayName": "고정현 CE (Google Cloud)"}, "earliestStartTime": "2026-08-18T15:03:00Z"},
     ]
     
@@ -99,9 +99,9 @@ def run_mock_test():
         }
     }
     mock_entries = [
-        {"name": f"{mock_transcript['name']}/entries/e001", "participant": "홍길동 팀장 (코웨이)", "startTime": "00:00:00", "text": "어 회의 성격에 맞는 어떤 회의록 포맷을 사전에 정리하고 그걸 기반으로 회의록을 작성하고자 합니다.", "languageCode": "ko-KR"},
+        {"name": f"{mock_transcript['name']}/entries/e001", "participant": "홍길동 팀장 (리테일 회사)", "startTime": "00:00:00", "text": "어 회의 성격에 맞는 어떤 회의록 포맷을 사전에 정리하고 그걸 기반으로 회의록을 작성하고자 합니다.", "languageCode": "ko-KR"},
         {"name": f"{mock_transcript['name']}/entries/e002", "participant": "고정현 CE (Google Cloud)", "startTime": "00:00:15", "text": "네, Vertex AI Gemini 3.7 Flash 모델의 멀티모달 오디오 처리 파이프라인을 통해 화자 분리와 회의록 작성이 가능합니다.", "languageCode": "ko-KR"},
-        {"name": f"{mock_transcript['name']}/entries/e003", "participant": "이상훈 담당 (코웨이)", "startTime": "00:00:35", "text": "보안 관점에서 회의 녹화 파일의 임시 저장소 라이프사이클 정책도 중요할 것 같습니다.", "languageCode": "ko-KR"},
+        {"name": f"{mock_transcript['name']}/entries/e003", "participant": "이상훈 담당 (리테일 회사)", "startTime": "00:00:35", "text": "보안 관점에서 회의 녹화 파일의 임시 저장소 라이프사이클 정책도 중요할 것 같습니다.", "languageCode": "ko-KR"},
     ]
     print(f"  ✅ Google Docs 연동 문서 ID: {mock_transcript['docsDestination']['document']}")
     print(f"  ✅ 수집된 발화 턴: 총 {len(mock_entries)}개 턴")

@@ -1388,7 +1388,7 @@ def process_gcs_media(req: ProcessGCSMediaRequest):
 @app.post("/api/v1/notes/upload-media")
 def process_uploaded_media(
     file: UploadFile = File(...),
-    title: str = Form("코웨이 AI 기술 미팅"),
+    title: str = Form("리테일 회사 AI 기술 미팅"),
     attendees: str = Form("홍길동 팀장, 이상훈 담당, 고정현 CE"),
     template_type: str = Form("CFT_REGULAR")
 ):

@@ -20,11 +20,11 @@ sys.path.insert(0, ROOT_DIR)
 
 from gg_calendar.calendar_service import CalendarService
 
-# Mock 테스트용 샘플 캘린더 데이터 (실제 코웨이-구글 회의 시나리오 반영)
+# Mock 테스트용 샘플 캘린더 데이터 (실제 리테일 회사-구글 회의 시나리오 반영)
 MOCK_CALENDAR_EVENTS = [
     {
         "id": "event_coway_meet_20260818",
-        "summary": "코웨이 AI 협업포털 회의록 자동화 및 Google Workspace/GCP 연동 기술 미팅",
+        "summary": "리테일 회사 AI 협업포털 회의록 자동화 및 Google Workspace/GCP 연동 기술 미팅",
         "description": "Google Meet 음성/영상 녹화본(16kHz 모노 MP3)을 Vertex AI Gemini 3.7 Flash로 분석하여 1페이지 요약 및 무가공 전사본을 생성하는 기술 아키텍처 검토",
         "start": {"dateTime": "2026-08-18T15:00:00+09:00"},
         "end": {"dateTime": "2026-08-18T16:30:00+09:00"},

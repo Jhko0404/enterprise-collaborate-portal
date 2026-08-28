@@ -5,7 +5,7 @@
 
 ## 📌 1. 개요 및 비즈니스 가치 (Why Google Calendar API?)
 
-코웨이 AI 협업포털은 **Google Calendar API v3**를 통해 사용자가 매번 번거롭게 회의명, 일시, 참석자 명단을 수동으로 입력할 필요 없이, **캘린더에 등록된 회의 일정을 1초 만에 불러와 AI 회의록에 자동 매핑**합니다.
+리테일 회사 AI 협업포털은 **Google Calendar API v3**를 통해 사용자가 매번 번거롭게 회의명, 일시, 참석자 명단을 수동으로 입력할 필요 없이, **캘린더에 등록된 회의 일정을 1초 만에 불러와 AI 회의록에 자동 매핑**합니다.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -55,7 +55,7 @@
     },
     {
       "id": "c_188abc..._coway.com@group.calendar.google.com",
-      "summary": "코웨이 AI TFT 공유 캘린더",
+      "summary": "리테일 회사 AI TFT 공유 캘린더",
       "primary": false,
       "timeZone": "Asia/Seoul",
       "accessRole": "writer"
@@ -90,7 +90,7 @@
   "items": [
     {
       "id": "evt_coway_20260820_01",
-      "summary": "코웨이 AI 협업포털 주간 정기 미팅",
+      "summary": "리테일 회사 AI 협업포털 주간 정기 미팅",
       "description": "Google Meet 기반 회의록 자동화 및 화자 분리 아키텍처 점검",
       "start": {
         "dateTime": "2026-08-20T14:00:00+09:00",
@@ -191,7 +191,7 @@
 #### 📥 Input (요청 본문 Body)
 ```json
 {
-  "summary": "[후속 회의] 코웨이 AI 협업포털 2차 아키텍처 점검",
+  "summary": "[후속 회의] 리테일 회사 AI 협업포털 2차 아키텍처 점검",
   "description": "1차 회의 Action Items 진행 경과 점검 및 Cloud Run 프로덕션 배포 검토",
   "start": {
     "dateTime": "2026-08-25T14:00:00+09:00",

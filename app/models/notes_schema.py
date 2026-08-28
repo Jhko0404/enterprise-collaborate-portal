@@ -55,6 +55,6 @@ class ResumableSessionResponse(BaseModel):
 class ProcessGCSMediaRequest(BaseModel):
     gcs_uri: str = Field(description="GCS 업로드 완료 URI (gs://...)")
     filename: str = Field(description="원본 파일명")
-    title: str = Field(default="코웨이 미디어 회의", description="회의 제목")
+    title: str = Field(default="리테일 회사 미디어 회의", description="회의 제목")
     attendees: str = Field(default="참석자 미입력", description="참석자 명단")
     template_type: str = Field(default="CFT_REGULAR", description="회의록 템플릿")

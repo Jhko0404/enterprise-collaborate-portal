@@ -33,7 +33,7 @@ def test_gemini_diarization():
             cft_notes = gemini_svc.generate_notes(
                 gcs_audio_uri=gcs_uri,
                 meeting_title="AI 협업포털 주간 CFT 회의",
-                attendees=["홍길동 팀장 (코웨이)", "이상훈 담당 (코웨이)", "고정현 CE (Google Cloud)"],
+                attendees=["홍길동 팀장 (리테일 회사)", "이상훈 담당 (리테일 회사)", "고정현 CE (Google Cloud)"],
                 template_prompt=CFT_REGULAR_PROMPT,
                 template_type="CFT_REGULAR"
             )
@@ -46,7 +46,7 @@ def test_gemini_diarization():
             print("\n2. 프로젝트 킥오프 템플릿(KICKOFF) 추론 테스트...")
             kickoff_notes = gemini_svc.generate_notes(
                 gcs_audio_uri=gcs_uri,
-                meeting_title="코웨이 AI 회의록 시스템 구축 킥오프",
+                meeting_title="리테일 회사 AI 회의록 시스템 구축 킥오프",
                 attendees=["홍길동 팀장", "이상훈 담당", "정소영 님"],
                 template_prompt=KICKOFF_PROMPT,
                 template_type="KICKOFF"

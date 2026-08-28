@@ -5,7 +5,7 @@
 
 ## 📌 1. 개요 및 비즈니스 가치 (Why Google Meet API v2?)
 
-코웨이 AI 협업포털은 **Google Meet REST API v2**를 통해 회의 공간(Space) 자동 생성부터 회의 종료 후 생성된 **클라우드 녹화본(Drive 비디오)과 참석자 명단을 사람의 개입 없이 100% 자동 수집**하여 AI 회의록 파이프라인으로 연결합니다.
+리테일 회사 AI 협업포털은 **Google Meet REST API v2**를 통해 회의 공간(Space) 자동 생성부터 회의 종료 후 생성된 **클라우드 녹화본(Drive 비디오)과 참석자 명단을 사람의 개입 없이 100% 자동 수집**하여 AI 회의록 파이프라인으로 연결합니다.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -32,7 +32,7 @@ Google Meet API v2는 크게 **1) 회의 공간 관리(Spaces)**와 **2) 회의 
 ---
 
 ### 1️⃣ `spaces.create` — 새 회의 공간 생성 & Meet 링크 발급 (⭐ 핵심 API)
-> 코웨이 전용 Google Meet 회의방을 동적으로 생성하고, 고유 회의 링크(`https://meet.google.com/...`)와 회의 코드를 발급합니다.
+> 리테일 회사 전용 Google Meet 회의방을 동적으로 생성하고, 고유 회의 링크(`https://meet.google.com/...`)와 회의 코드를 발급합니다.
 
 * **HTTP Method & Endpoint**: `POST https://meet.googleapis.com/v2/spaces`
 * **필수 권한 (Scope)**: `https://www.googleapis.com/auth/meetings.space.created`
@@ -187,7 +187,7 @@ Google Meet API v2는 크게 **1) 회의 공간 관리(Spaces)**와 **2) 회의 
     {
       "name": "conferenceRecords/.../transcripts/trans_001/entries/entry_01",
       "participant": "conferenceRecords/.../participants/part_user_01",
-      "text": "오늘 회의에서는 코웨이 AI 협업포털 회의록 자동화 아키텍처를 점검하겠습니다.",
+      "text": "오늘 회의에서는 리테일 회사 AI 협업포털 회의록 자동화 아키텍처를 점검하겠습니다.",
       "languageCode": "ko-KR",
       "startTime": "2026-08-20T14:01:05.120Z",
       "endTime": "2026-08-20T14:01:10.540Z"
