@@ -1,0 +1,23 @@
+# Google GenAI & Speech
+google-genai>=2.18.0
+google-cloud-storage>=3.13.0
+google-cloud-speech>=2.28.0
+
+# Google Workspace APIs & OAuth
+google-auth>=2.30.0
+google-auth-oauthlib>=1.2.0
+google-auth-httplib2>=0.2.0
+google-api-python-client>=2.130.0
+google-apps-meet>=0.5.0
+
+
+# Web Framework & Validation
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.7.0
+pydantic-settings>=2.3.0
+python-multipart>=0.0.9
+
+# Resilience & Utilities
+tenacity>=8.4.0
+python-dotenv>=1.0.1

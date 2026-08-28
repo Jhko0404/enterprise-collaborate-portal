@@ -1,0 +1,9 @@
+.git
+.gitignore
+.venv
+__pycache__
+*.pyc
+*.log
+data/input_media/*.mp4
+data/input_media/*.mov
+data/outputs/

@@ -1,0 +1,11 @@
+[
+  {"name": "feedback_id", "type": "STRING", "mode": "REQUIRED"},
+  {"name": "job_id", "type": "STRING", "mode": "REQUIRED"},
+  {"name": "requestor_email", "type": "STRING", "mode": "REQUIRED"},
+  {"name": "template_type", "type": "STRING", "mode": "REQUIRED"},
+  {"name": "rating_score", "type": "INT64", "mode": "NULLABLE"},
+  {"name": "is_diarization_accurate", "type": "BOOLEAN", "mode": "NULLABLE"},
+  {"name": "is_summary_accurate", "type": "BOOLEAN", "mode": "NULLABLE"},
+  {"name": "user_comment", "type": "STRING", "mode": "NULLABLE"},
+  {"name": "created_at", "type": "TIMESTAMP", "mode": "REQUIRED"}
+]

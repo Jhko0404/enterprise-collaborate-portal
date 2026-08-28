@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>엔터프라이즈 AI 협업포털 - Google Meet 회의록 & 다중 화자 분리</title>
+  <link rel="stylesheet" href="/static/style.css?v=20260825_07">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">
+      <div class="logo-badge">Enterprise AI</div>
+      <div class="brand-text">
+        <h1>AI 협업포털 회의록 자동화</h1>
+        <span>Google Workspace & Vertex AI Gemini 3.7 Flash</span>
+      </div>
+    </div>
+    <!-- Global Top Page Navigation -->
+    <nav class="nav-pages">
+      <button class="nav-page-btn active" id="navCreateBtn" onclick="switchMainPage('create')">
+        <span>🎙️ 회의록 생성</span>
+      </button>
+      <button class="nav-page-btn" id="navListBtn" onclick="switchMainPage('list')">
+        <span>📚 회의록 보관함</span>
+        <span class="nav-badge" id="reportCountBadge">-</span>
+      </button>
+    </nav>
+
+    <div class="header-meta">
+      <span class="badge-live">
+        <span class="pulse-dot"></span>
+        Gemini 3.7 Flash
+      </span>
+      <button class="btn btn-swagger btn-sm" onclick="openDocs()">📘 Swagger API</button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="app-container">
+
+    <!-- PAGE 1: 회의록 생성 (Create Report View) -->
+    <div id="pageCreateView" class="page-view active">
+      <div class="bento-grid">
+
+        <!-- Left Column: Controls & Input -->
+        <aside class="card">
+          <div class="card-header">
+            <h2 class="card-title">🎙️ 회의 미디어 입력</h2>
+            <span class="tag-poc">✨ PoC Live</span>
+          </div>
+
+          <form id="meetingForm" onsubmit="handleGenerate(event)">
+            <!-- Media Source Selection & Input Mode -->
+            <div class="form-group">
+              <label class="form-label">미디어 소스 선택</label>
+              <select class="form-control" id="sampleSelect" onchange="handleSampleSelectChange()">
+                <option value="custom_file" selected>📁 직접 파일 업로드 (MP3, M4A, WAV, MP4 등)</option>
+                <option value="custom_bucket">☁️ GCS 버킷 / 로컬 data/input_media 탐색</option>
+                <option value="custom_url">🔗 웹 / 클라우드 미디어 URL 직접 입력</option>
+              </select>
+            </div>
+
+            <!-- Quick Action Buttons for Inputs -->
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:12px;" id="quickFileBtnsGroup">
+              <button type="button" class="btn btn-quick-file btn-sm" onclick="openFilePicker()" title="내 컴퓨터의 음성/영상 파일 선택">
+                <span>📁 파일 탐색기</span>
+              </button>
+              <button type="button" class="btn btn-quick-url btn-sm" onclick="openUrlModal()" title="URL 입력 및 접근성 검증">
+                <span>🔗 URL 지정/검증</span>
+              </button>
+            </div>
+            <div style="margin-bottom:16px;" id="quickBucketBtnGroup">
+              <button type="button" class="btn btn-quick-bucket btn-sm" style="width:100%;" onclick="openBucketModal()" title="GCS 버킷 및 data/input_media 파일 검색">
+                <span>☁️ 버킷 파일 검색 (data/input_media)</span>
+              </button>
+            </div>
+
+            <!-- File Upload Dropzone -->
+            <div class="form-group" id="uploadGroup" style="display:block;">
+              <label class="form-label">미디어 파일 업로드 (드래그 또는 클릭)</label>
+              <div class="dropzone" id="dropzone" onclick="openFilePicker()">
+                <div class="dropzone-icon">📁</div>
+                <div class="dropzone-text" id="dropzoneText">클릭하여 PC 파일 탐색기를 열거나 드래그하세요</div>
+                <div class="dropzone-hint">MP4, MOV, M4A, MP3, WAV 지원</div>
+                <input type="file" id="fileInput" style="display:none;" accept="audio/*,video/*" onchange="handleFileSelected(event)">
+              </div>
+              <div id="fileSelectedBadge" style="display:none; margin-top:8px; padding:8px 12px; background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.4); border-radius:6px; font-size:12px; color:#15803d; font-weight:600;">
+                ✅ 선택 완료: <span id="fileSelectedName" style="font-weight:bold;"></span>
+              </div>
+            </div>
+
+            <!-- URL Active Badge -->
+            <div class="form-group" id="urlActiveGroup" style="display:none;">
+              <label class="form-label">지정된 미디어 URL</label>
+              <div style="padding:10px 12px; background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; font-size:12px; color:#1d4ed8; display:flex; justify-content:space-between; align-items:center;">
+                <span id="activeUrlText" style="word-break:break-all; font-family:var(--font-mono); font-size:11px;"></span>
+                <button type="button" class="btn btn-quick-url btn-sm" style="padding:2px 8px; font-size:11px;" onclick="openUrlModal()">변경</button>
+              </div>
+            </div>
+
+            <!-- Meeting Title -->
+            <div class="form-group">
+              <label for="meetingTitle" class="form-label required">회의 제목</label>
+            <input type="text" class="form-control" id="meetingTitle" placeholder="예: 엔터프라이즈 AI 협업포털 회의록 자동화 기술 미팅">
+            <span class="form-hint">회의 주제를 입력하세요 (Google Docs 및 리포트 파일명에 반영됩니다)</span><!-- Meeting Template -->
+            <div class="form-group">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <label class="form-label" for="templateType" style="margin-bottom:0;">회의 템플릿</label>
+                <button type="button" class="btn btn-quick-template" onclick="openTemplateModal()" title="프롬프트 템플릿 조회 및 수정">
+                  ⚙️ 프롬프트 수정
+                </button>
+              </div>
+              <select class="form-control" id="templateType" onchange="handleTemplateSelectChange()">
+                <option value="CFT_REGULAR" selected>📊 CFT 정기 회의 (부서별 안건 + Action Items)</option>
+                <option value="KICKOFF">🚀 프로젝트 킥오프 (목표 + 마일스톤 + R&R)</option>
+                <option value="EXECUTIVE">👔 임원 보고 (1페이지 핵심 요약 + 결정사항)</option>
+              </select>
+            </div>
+
+            <!-- Attendees -->
+            <div class="form-group">
+              <label class="form-label" for="attendees">캘린더 참석자 명단</label>
+              <input type="text" class="form-control" id="attendees" placeholder="예시 : 고정현 CE (Google Cloud), 김진아 FSR (Google Cloud)">
+            </div>
+
+            <!-- Action Button -->
+            <button type="submit" class="btn btn-primary" id="generateBtn">
+              <span>🚀 Gemini 3.7 Flash 회의록 생성</span>
+            </button>
+          </form>
+
+          <div style="margin-top: 18px; border-top: 1px solid var(--border-color); padding-top: 16px;">
+            <button class="btn btn-quick-replace" style="width:100%;" onclick="openSpeakerModal()">
+              <span>🔄 화자 일괄 치환 (Replace All)</span>
+            </button>
+          </div>
+        </aside>
+
+        <!-- Right Column: Results Showcase -->
+        <section class="card" style="min-height: 680px;">
+          <div class="card-header">
+            <div class="tabs-nav" style="margin-bottom:0; width: 100%; max-width: 780px;">
+              <button class="tab-btn active" onclick="switchTab('notesTab')">📋 구조화 회의록</button>
+              <button class="tab-btn" onclick="switchTab('transcriptTab')">🎙️ 전체 대화 스크립트</button>
+              <button class="tab-btn" onclick="switchTab('markdownTab')">📄 원문 마크다운</button>
+              <button class="tab-btn" id="tabCompareBtn" onclick="switchTab('compareTab')">⚖️ 전사 엔진 비교</button>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn btn-secondary btn-sm" id="btnCopyReport" onclick="copyMarkdown()">📋 복사</button>
+            </div>
+          </div>
+
+          <!-- Tab 1: Structured Notes -->
+          <div id="notesTab" class="tab-content active">
+            <div class="notes-container" id="notesContainer">
+              <!-- Dynamic Content Injected by JS -->
+            </div>
+          </div>
+
+          <!-- Tab 2: Full Transcript -->
+          <div id="transcriptTab" class="tab-content">
+            <div class="transcript-flow" id="transcriptContainer">
+              <!-- Dynamic Dialogue Injected by JS -->
+            </div>
+          </div>
+
+          <!-- Tab 3: Raw Markdown -->
+          <div id="markdownTab" class="tab-content">
+            <pre class="markdown-preview" id="markdownPreview"></pre>
+          </div>
+
+          <!-- Tab 4: Engine Comparison View -->
+          <div id="compareTab" class="tab-content">
+            <div id="compareContainer" class="compare-container">
+              <!-- Dynamic Comparison Injected by JS -->
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- PAGE 2: 회의록 보관함 / 목록 및 상세 조회 (Report Archive & List View) -->
+    <div id="pageListView" class="page-view" style="display:none;">
+      
+      <!-- Stats Summary Banner -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon-box" style="background:#eff6ff; color:#2563eb;">📚</div>
+          <div class="stat-info">
+            <div class="stat-value" id="statTotalReports">1건</div>
+            <div class="stat-label">보관된 AI 회의록</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-box" style="background:#ecfdf5; color:#059669;">🕒</div>
+          <div class="stat-info">
+            <div class="stat-value" id="statCurrentClock" style="font-family:var(--font-mono); font-size:18px; font-weight:800; letter-spacing:-0.5px;">--:--:--</div>
+            <div class="stat-label" id="statCurrentDate">현재 시간 (KST)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-box" style="background:#f5f3ff; color:#7c3aed;">🎯</div>
+          <div class="stat-info">
+            <div class="stat-value" id="statDominantTemplate" style="font-size:17px; font-weight:800;">CFT 정기 회의</div>
+            <div class="stat-label" id="statDominantLabel">주요 회의 템플릿</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-box" style="background:#fffbeb; color:#d97706;">⚡</div>
+          <div class="stat-info">
+            <div class="stat-value">Gemini 3.7</div>
+            <div class="stat-label">멀티모달 오디오 AI</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search & Filter Bar -->
+      <div class="archive-toolbar">
+        <div class="archive-search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="reportSearchInput" class="archive-search-input" placeholder="회의 제목, 참석자, 주요 키워드로 검색..." oninput="handleReportSearch()">
+        </div>
+        <div style="width:200px;">
+          <select id="reportTemplateFilter" class="archive-filter-select" onchange="handleReportSearch()" style="width:100%;">
+            <option value="ALL">전체 템플릿</option>
+            <option value="CFT_REGULAR">📊 CFT 정기 회의</option>
+            <option value="EXECUTIVE">👔 임원 보고</option>
+            <option value="KICKOFF">🚀 프로젝트 킥오프</option>
+          </select>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="loadReportsArchive()" title="목록 새로고침" style="padding:10px 16px; border-radius:10px; font-weight:700;">
+          🔄 새로고침
+        </button>
+      </div>
+
+      <!-- Reports List Container -->
+      <div id="reportsGridContainer">
+        <!-- Injected dynamically by JS -->
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Modal 1: One-Click Speaker Replace -->
+  <div class="modal" id="speakerModal">
+    <div class="modal-card" style="max-width:620px;">
+      <div class="card-header">
+        <h3 class="card-title">🔄 화자 일괄 치환 (Replace All)</h3>
+        <button class="btn btn-secondary btn-sm" onclick="closeSpeakerModal()">✕</button>
+      </div>
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:14px;">
+        음성으로 분리된 <strong>기존 화자 라벨</strong>(예: <code>[참석자 1]</code>, <code>[화자 1]</code>, <code>Speaker 1</code> 등)을 원하는 <strong>참석자 이름</strong>으로 문서 전체에서 일괄 치환합니다.
+      </p>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; font-size:12px; font-weight:700; color:var(--text-secondary); padding:0 4px;">
+        <span style="flex:1;">기존 화자 라벨 (수정 가능)</span>
+        <span style="width:24px; text-align:center;"></span>
+        <span style="flex:1.4;">치환할 참석자 이름</span>
+        <span style="width:36px;"></span>
+      </div>
+
+      <!-- Dynamic Speaker Mapping Rows -->
+      <div id="speakerMapRows" style="display:flex; flex-direction:column; gap:10px; margin-bottom:14px; max-height:280px; overflow-y:auto; padding-right:4px;">
+      </div>
+
+      <!-- 참석자 자동완성 datalist -->
+      <datalist id="speakerAttendeesDatalist">
+        <option value="둘리 팀장 (PM)"></option>
+        <option value="고정현 CE (Google Cloud)"></option>
+        <option value="고길동 님"></option>
+        <option value="마이콜 님"></option>
+        <option value="파이리 수행사 팀장"></option>
+      </datalist>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:12px; border-top:1px solid #f1f5f9;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="addSpeakerMapRow()" style="font-size:12px; font-weight:700;">
+          ➕ 치환 규칙 추가
+        </button>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn-secondary" onclick="closeSpeakerModal()">취소</button>
+          <button type="button" class="btn btn-primary" style="width:auto;" onclick="applySpeakerReplace()">일괄 치환 적용</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: URL Input & Verification -->
+  <div class="modal" id="urlModal">
+    <div class="modal-card">
+      <div class="card-header">
+        <h3 class="card-title">🔗 미디어 URL 입력 및 접근성 검증</h3>
+        <button class="btn btn-secondary btn-sm" onclick="closeUrlModal()">✕</button>
+      </div>
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:14px;">
+        인터넷 웹 미디어 URL(<code>https://...</code>) 또는 GCS 버킷 경로(<code>gs://...</code>)를 입력하여 접근성을 즉시 검증합니다.
+      </p>
+
+      <div class="form-group">
+        <label class="form-label">미디어 URL 경로</label>
+        <div style="display:flex; gap:8px;">
+          <input type="text" class="form-control" id="urlInput" placeholder="예: https://example.com/video.mp4 또는 gs://버킷명/경로/audio.mp3">
+          <button type="button" class="btn btn-secondary" style="white-space:nowrap; padding:0 14px;" onclick="verifyUrlAccessibility()" id="verifyUrlBtn">
+            <span>🔍 접근성 확인</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Verification Result Box -->
+      <div id="urlVerifyResult" style="display:none; padding:12px 14px; border-radius:6px; font-size:13px; margin-bottom:18px;">
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:10px;">
+        <button class="btn btn-secondary" onclick="closeUrlModal()">취소</button>
+        <button class="btn btn-primary" style="width:auto;" onclick="applyUrlSelection()" id="applyUrlBtn">이 URL로 설정</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: GCS Bucket & Local data/input_media File Browser -->
+  <div class="modal" id="bucketModal">
+    <div class="modal-card" style="max-width:680px;">
+      <div class="card-header">
+        <h3 class="card-title">☁️ 버킷 & 로컬 미디어 탐색기</h3>
+        <button class="btn btn-secondary btn-sm" onclick="closeBucketModal()">✕</button>
+      </div>
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px;">
+        <code>data/input_media/</code> 경로에 위치한 파일 목록입니다. 분석할 미디어를 선택하세요.
+      </p>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <span style="font-size:12px; color:var(--text-muted);" id="bucketInfoText">조회 중...</span>
+        <button class="btn btn-secondary btn-sm" onclick="fetchBucketFiles()">🔄 새로고침</button>
+      </div>
+
+      <div id="bucketFileList" style="max-height:300px; overflow-y:auto; border:1px solid var(--border-color); border-radius:6px; background:rgba(15,23,42,0.4); margin-bottom:18px;">
+        <div style="padding:20px; text-align:center; color:var(--text-muted);">파일 목록을 불러오는 중...</div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:10px;">
+        <button class="btn btn-secondary" onclick="closeBucketModal()">닫기</button>
+        <button class="btn btn-primary" style="width:auto;" onclick="applyBucketSelection()" id="applyBucketBtn" disabled>선택한 파일로 설정</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Meeting Template Prompt Manager -->
+  <div class="modal" id="templateModal">
+    <div class="modal-card" style="max-width:720px;">
+      <div class="card-header">
+        <h3 class="card-title">⚙️ 회의 템플릿 프롬프트 관리 & 수정</h3>
+        <button class="btn btn-secondary btn-sm" onclick="closeTemplateModal()">✕</button>
+      </div>
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:14px;">
+        회의 유형별로 Gemini 3.7 Flash 모델에 전달되는 시스템 프롬프트를 조회하고 수정하여 즉시 반영할 수 있습니다.
+      </p>
+
+      <div class="form-group">
+        <label class="form-label">수정할 템플릿 선택</label>
+        <select class="form-control" id="modalTemplateSelect" onchange="handleTemplateModalChange()">
+          <option value="CFT_REGULAR">📊 CFT 정기 회의록 (CFT_REGULAR)</option>
+          <option value="KICKOFF">🚀 프로젝트 킥오프 (KICKOFF)</option>
+          <option value="EXECUTIVE">👔 경영진/임원 보고 (EXECUTIVE)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">템플릿 명칭</label>
+        <input type="text" class="form-control" id="templateNameInput" value="CFT 정기 회의록">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">템플릿 설명</label>
+        <input type="text" class="form-control" id="templateDescInput" value="정기 TFT/CFT 미팅을 위한 회의록 템플릿">
+      </div>
+
+      <div class="form-group">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <label class="form-label" style="margin-bottom:0;">시스템 프롬프트 전문 (Prompt Editor)</label>
+          <button type="button" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:11px;" onclick="resetTemplatePrompt()">
+            🔄 기본값 복원
+          </button>
+        </div>
+        <textarea id="templatePromptTextarea" class="form-control" style="font-family:var(--font-mono); font-size:12px; line-height:1.6; min-height:240px; resize:vertical;"></textarea>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+        <button class="btn btn-secondary" onclick="closeTemplateModal()">취소</button>
+        <button class="btn btn-primary" style="width:auto;" onclick="saveTemplatePrompt()" id="saveTemplateBtn">
+          💾 저장 및 즉시 반영
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Report Detail Viewer Modal -->
+  <div class="modal" id="reportDetailModal">
+    <div class="modal-card" style="max-width:1100px; max-height:94vh; display:flex; flex-direction:column;">
+      <div class="card-header" style="margin-bottom:12px; flex-shrink:0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+          <h3 class="card-title" id="reportDetailModalTitle" style="margin:0; font-size:16px;">📋 회의록 상세 리포트</h3>
+          <!-- Modal Tabs Switcher -->
+          <div class="nav-tabs" style="border:none; margin:0; gap:4px;" id="modalTabNav">
+            <button class="nav-tab active" id="modalTabBtnNotes" onclick="switchModalTab('notes')">📋 구조화 회의록</button>
+            <button class="nav-tab" id="modalTabBtnTranscript" onclick="switchModalTab('transcript')">🎙️ 전체 대화 스크립트</button>
+            <button class="nav-tab" id="modalTabBtnMarkdown" onclick="switchModalTab('markdown')">📄 원문 마크다운</button>
+            <button class="nav-tab" id="modalTabBtnCompare" onclick="switchModalTab('compare')">⚖️ 전사 엔진 비교</button>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <button class="btn btn-secondary btn-sm" onclick="copyDetailModalMarkdown()" title="전체 회의록 마크다운 복사">📋 전체 복사</button>
+          <button class="btn btn-report-delete btn-sm" onclick="deleteActiveDetailReport()" title="회의록 영구 삭제">🗑️ 삭제</button>
+          <button class="btn btn-secondary btn-sm" onclick="closeReportDetailModal()">✕ 닫기</button>
+        </div>
+      </div>
+      <div id="reportDetailModalBody" style="overflow-y:auto; flex:1; padding-right:8px;">
+        <!-- Dynamic Content Injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Floating Toast Container for non-blocking notifications -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="/static/app.js?v=20260828_06"></script>
+</body>
+</html>

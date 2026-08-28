@@ -1,0 +1,47 @@
+variable "project_id" {
+  description = "Google Cloud Project ID"
+  type        = string
+  default     = "jhk-ai-sandbox-378741"
+}
+
+variable "access_token" {
+  description = "OAuth 2.0 access token for GCP provider"
+  type        = string
+  default     = ""
+}
+
+variable "region" {
+  description = "Google Cloud Region"
+  type        = string
+  default     = "us-central1"
+}
+
+variable "bucket_name" {
+  description = "GCS Temporary Audio Storage Bucket Name"
+  type        = string
+  default     = "jhk-ai-sandbox-378741-meet-audio-temp"
+}
+
+variable "artifact_repo_name" {
+  description = "Artifact Registry Docker Repository Name"
+  type        = string
+  default     = "coway-meet-notes-repo"
+}
+
+variable "tasks_queue_name" {
+  description = "Cloud Tasks Queue Name for Asynchronous Notes Generation"
+  type        = string
+  default     = "meet-notes-queue"
+}
+
+variable "bigquery_dataset_id" {
+  description = "BigQuery Analytics Dataset ID"
+  type        = string
+  default     = "coway_portal_analytics"
+}
+
+variable "service_account_id" {
+  description = "Dedicated Service Account ID for Meet Notes Processor"
+  type        = string
+  default     = "coway-meet-notes-sa"
+}

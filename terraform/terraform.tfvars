@@ -1,0 +1,7 @@
+project_id          = "jhk-ai-sandbox-378741"
+region              = "us-central1"
+bucket_name         = "jhk-ai-sandbox-378741-meet-audio-temp"
+artifact_repo_name  = "coway-meet-notes-repo"
+tasks_queue_name    = "meet-notes-queue"
+bigquery_dataset_id = "coway_portal_analytics"
+service_account_id  = "coway-meet-notes-sa"

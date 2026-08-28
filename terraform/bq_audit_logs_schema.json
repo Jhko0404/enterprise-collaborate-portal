@@ -1,0 +1,18 @@
+[
+  {"name": "trace_id", "type": "STRING", "mode": "REQUIRED"},
+  {"name": "job_id", "type": "STRING", "mode": "REQUIRED"},
+  {"name": "requestor_email", "type": "STRING", "mode": "REQUIRED"},
+  {"name": "meeting_title", "type": "STRING", "mode": "NULLABLE"},
+  {"name": "audio_duration_seconds", "type": "INT64", "mode": "NULLABLE"},
+  {"name": "audio_file_size_bytes", "type": "INT64", "mode": "NULLABLE"},
+  {"name": "template_type", "type": "STRING", "mode": "NULLABLE"},
+  {"name": "vertex_model_name", "type": "STRING", "mode": "NULLABLE"},
+  {"name": "audio_tokens_used", "type": "INT64", "mode": "NULLABLE"},
+  {"name": "output_tokens_used", "type": "INT64", "mode": "NULLABLE"},
+  {"name": "execution_status", "type": "STRING", "mode": "REQUIRED"},
+  {"name": "total_latency_ms", "type": "INT64", "mode": "REQUIRED"},
+  {"name": "audio_extract_latency_ms", "type": "INT64", "mode": "NULLABLE"},
+  {"name": "gemini_latency_ms", "type": "INT64", "mode": "NULLABLE"},
+  {"name": "docs_create_latency_ms", "type": "INT64", "mode": "NULLABLE"},
+  {"name": "created_at", "type": "TIMESTAMP", "mode": "REQUIRED"}
+]
